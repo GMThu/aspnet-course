@@ -59,6 +59,24 @@ GitHub Pages 使用 `main` 分支的根目錄 `/`。提交並推送更新後，�
 
 推送不等於發布完成；更新後需確認 Pages 建置成功，並開啟公開網址檢查實際內容與互動。
 
+### PDF 內嵌連結檢查
+
+第三週教材下載／參考入口使用正式 GitHub Pages 完整網址，避免從本機匯出 PDF 時把相對連結固定成 `127.0.0.1` 或本機檔案路徑。更新教材產生器時也要保留這些正式網址。
+
+每次匯出第三週 PDF 後、發布前執行：
+
+```sh
+uv run --with pymupdf python tools/check_pdf_links.py
+```
+
+發布後以同一檢查讀取正式檔案（可加 `?v=<commit>` 避免快取）：
+
+```sh
+uv run --with pymupdf python tools/check_pdf_links.py https://gmthu.github.io/aspnet-course/week03/ASP.NET-Week03.pdf
+```
+
+此檢查驗證 PDF 的 31 頁、5 處教材連結及無本機 URI；不只檢查下載回應是否為 200。
+
 ## 隱私與示範範圍
 
 - 網站為公開靜態教材，沒有學生帳號或後端資料收集。
