@@ -7,6 +7,8 @@
 - [課程首頁](https://gmthu.github.io/aspnet-course/)
 - [第一週網頁簡報](https://gmthu.github.io/aspnet-course/week01/)
 - [第一週 PDF 講義](https://gmthu.github.io/aspnet-course/week01/ASP.NET-Week01.pdf)
+- [第三週任務闖關版](https://gmthu.github.io/aspnet-course/week03-mission/)
+- [第三週完整教材原版](https://gmthu.github.io/aspnet-course/week03/)
 
 ## 課程安排
 
@@ -48,8 +50,18 @@
 index.html                      課程首頁
 .nojekyll                       直接發布靜態檔案
 week01/index.html               第一週網頁簡報
-week01/ASP.NET-Week01.pdf        第一週列印講義
+week01/ASP.NET-Week01.pdf       第一週列印講義
+week03/index.html               第三週完整教材原版（保留）
+week03-mission/index.html       第三週任務闖關版
+week03-mission/materials/       闖關版學生素材與下載包
 ```
+
+## 第三週雙版本
+
+- `week03/` 是原本 31 頁完整教材，網址、PDF 與學生練習包保持不變。
+- `week03-mission/` 是 14 頁任務闖關版：五關進度、HTML 自動檢查站、隨機最終 Boss，完成後由老師現場驗收。
+- 闖關版進度只保存在學生目前使用的瀏覽器 `localStorage`，不會上傳；自動檢查站不修改學生專案，實際網站仍須在 localhost 驗證。
+- 任務版學生包包含 Razor 內容起始檔、純 HTML 備用檔與課堂示意圖片。
 
 ## 發布與更新
 
