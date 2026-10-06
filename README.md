@@ -4,7 +4,8 @@
 
 ## 線上教材
 
-- [課程首頁](https://gmthu.github.io/aspnet-course/)
+- [學生版課程總覽](https://gmthu.github.io/aspnet-course/)
+- [老師版課程總覽](https://gmthu.github.io/aspnet-course/teacher.html)（包含教師提示與解答位置；入口區分不等於權限保護）
 - [第一週網頁簡報](https://gmthu.github.io/aspnet-course/week01/)
 - [第一週 PDF 講義](https://gmthu.github.io/aspnet-course/week01/ASP.NET-Week01.pdf)
 - [第三週任務闖關版](https://gmthu.github.io/aspnet-course/week03-mission/)
@@ -48,7 +49,8 @@
 ## 目錄
 
 ```text
-index.html                      課程首頁
+index.html                      學生版課程總覽
+teacher.html                    老師版課程總覽（教師提示、解答位置、驗收重點）
 .nojekyll                       直接發布靜態檔案
 week01/index.html               第一週網頁簡報
 week01/ASP.NET-Week01.pdf       第一週列印講義
@@ -68,7 +70,7 @@ week03-mission/materials/       闖關版學生素材與下載包
 
 GitHub Pages 使用 `main` 分支的根目錄 `/`。提交並推送更新後，由 GitHub 自動建置發布。
 
-新增週次時，建立 `week02/index.html` 等目錄，再更新首頁的講義入口。保留既有週次網址，方便學生持續使用。
+新增週次時，建立對應週次目錄，並同步更新 `index.html` 學生版與 `teacher.html` 老師版。學生版只放上課所需教材；教師提示、解答位置與驗收重點集中在老師版。保留既有週次網址，方便學生持續使用。
 
 推送不等於發布完成；更新後需確認 Pages 建置成功，並開啟公開網址檢查實際內容與互動。
 
@@ -93,6 +95,7 @@ uv run --with pymupdf python tools/check_pdf_links.py https://gmthu.github.io/as
 ## 隱私與示範範圍
 
 - 網站為公開靜態教材，沒有學生帳號或後端資料收集。
+- `teacher.html` 使用簡易前端通關頁與 `noindex` 降低誤入及搜尋引擎收錄；通關狀態只保留在目前分頁。這不能提供真正存取控制，知道直接資源網址或查看公開原始碼的人仍可能繞過；老師版不得存放真實個資、帳密、API 金鑰、未公開成績或其他敏感資料。
 - 提案表草稿僅保存於本機瀏覽器；共用電腦請清除草稿。
 - 報名示範為 JavaScript 教學模型，不是實際 ASP.NET、登入或資料庫。
 - 不上傳真實個資、密碼、API 金鑰或私密課務資料。

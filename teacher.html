@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="description" content="東海 ASP.NET 課程老師版總覽：教師提示、授課流程、解答位置與學生教材入口。">
+  <title>東海 ASP.NET｜老師版總覽</title>
+  <style>
+    :root{color-scheme:dark;--bg:#171510;--surface:#252118;--surface2:#30291d;--ink:#fff8e8;--muted:#d4c8b2;--accent:#f0bd63;--accent2:#ef826f;--line:#655641;--student:#d9ef8b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0,#4a301f55,transparent 32%),var(--bg);color:var(--ink);font-family:"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75}main{max-width:1120px;margin:auto;padding:58px 32px 44px}a{color:var(--accent)}a:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:5px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.badge{display:inline-flex;padding:7px 12px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:900;letter-spacing:1.5px}.student-link{display:inline-flex;min-height:44px;align-items:center;padding:7px 15px;border:1px solid #66764c;border-radius:8px;color:var(--student);font-weight:800;text-decoration:none}.eyebrow{color:var(--accent);letter-spacing:2px;font-size:15px;margin-top:34px}h1{font-size:clamp(38px,6vw,67px);line-height:1.2;letter-spacing:-1px;margin:14px 0}h1 span{color:var(--accent)}.intro{font-size:21px;color:var(--muted);max-width:880px}.warning{margin:28px 0;padding:17px 20px;border:1px solid #9c6958;border-left:6px solid var(--accent2);background:#35231e;color:#f6d9d1}.quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:30px 0}.quick a{display:flex;min-height:78px;align-items:center;padding:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:800;text-decoration:none}.quick small{display:block;color:var(--accent);font-weight:700}h2{font-size:30px;margin:42px 0 20px}.week-card{margin-top:22px;padding:28px;border:1px solid var(--line);background:var(--surface)}.week-label{color:var(--accent);font-size:14px;font-weight:900;letter-spacing:2px}.week-card h3{font-size:29px;line-height:1.35;margin:8px 0}.week-card>p{color:var(--muted);font-size:17px}.links{display:flex;gap:12px;flex-wrap:wrap;margin:19px 0}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:8px 17px;border-radius:7px;background:var(--accent);color:#2d2112;font-weight:900;text-decoration:none}.button.secondary{border:1px solid var(--line);background:transparent;color:var(--ink)}.button.answer{background:var(--accent2);color:#291512}details{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}summary{cursor:pointer;color:var(--accent);font-size:17px;font-weight:900}details ul{margin:12px 0 0;padding-left:24px;color:var(--muted)}.status{display:inline-flex;margin-left:8px;padding:2px 8px;border-radius:999px;background:#423725;color:#f2d391;font-size:12px;vertical-align:middle}.policy{display:grid;grid-template-columns:1fr 1fr;gap:18px}.policy article{padding:20px;border:1px solid var(--line);background:var(--surface2)}.policy h3{margin:0 0 7px}.policy p{margin:0;color:var(--muted)}footer{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}@media(max-width:760px){main{padding:36px 20px}.quick,.policy{grid-template-columns:1fr}.week-card{padding:22px}.button{width:100%}.intro{font-size:18px}}
+  </style>
+  <style>
+    [hidden]{display:none!important}.gate{min-height:100vh;display:grid;place-items:center;padding:24px}.gate-card{width:min(100%,480px);padding:32px;border:1px solid var(--line);border-top:5px solid var(--accent);background:var(--surface);box-shadow:0 24px 70px #0007}.gate-card .badge{margin-bottom:18px}.gate-card h1{font-size:clamp(31px,8vw,46px);margin:8px 0 12px}.gate-card p{color:var(--muted)}.gate-card label{display:block;margin:22px 0 7px;font-weight:900}.gate-row{display:grid;grid-template-columns:1fr auto;gap:10px}.gate-card input{min-width:0;min-height:50px;padding:10px 14px;border:1px solid var(--line);border-radius:7px;background:#110f0c;color:var(--ink);font:inherit;font-size:20px}.gate-card button,.lock-button{min-height:50px;padding:9px 19px;border:0;border-radius:7px;background:var(--accent);color:#2d2112;font:inherit;font-weight:900;cursor:pointer}.gate-error{min-height:1.75em;margin:9px 0 0!important;color:#ffb5a7!important;font-weight:800}.gate-back{display:inline-block;margin-top:12px}.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.lock-button{min-height:44px;background:transparent;border:1px solid var(--line);color:var(--ink)}@media(max-width:520px){.gate-card{padding:24px}.gate-row{grid-template-columns:1fr}.gate-card button{width:100%}}
+  </style>
+</head>
+<body>
+<section class="gate" id="teacher-gate" aria-labelledby="gate-title">
+  <form class="gate-card" id="teacher-gate-form">
+    <span class="badge">教師版 · 簡易防誤入</span>
+    <h1 id="gate-title">請輸入通關密碼</h1>
+    <p>此頁包含授課提示與解答位置。通關狀態只保留在目前分頁；關閉分頁後需重新輸入。</p>
+    <label for="teacher-passcode">通關密碼</label>
+    <div class="gate-row"><input id="teacher-passcode" name="passcode" type="password" inputmode="numeric" autocomplete="current-password" required aria-describedby="gate-error"><button type="submit">進入老師版</button></div>
+    <p class="gate-error" id="gate-error" role="alert" aria-live="polite"></p>
+    <a class="gate-back" href="index.html">← 回學生版總覽</a>
+  </form>
+</section>
+<main id="teacher-content" hidden>
+  <div class="topbar"><span class="badge">教師資料 · 請勿轉傳學生</span><div class="top-actions"><a class="student-link" href="index.html">檢查學生版總覽 →</a><button class="lock-button" id="lock-teacher" type="button">鎖定老師版</button></div></div>
+  <header>
+    <p class="eyebrow">東海大學 · ASP.NET · 老師版總覽</p>
+    <h1>教材、提示與驗收，<br><span>集中從這裡進入。</span></h1>
+    <p class="intro">每週同時列出學生會拿到的教材，以及老師上課前需要看的提示、解答位置與驗收重點。尚未建立教師小抄的週次會明確標示，不用猜哪個檔案是最新版。</p>
+    <p class="warning"><strong>重要：</strong>本頁的通關密碼與 <code>noindex</code> 只用來降低誤入與搜尋引擎收錄機會。網站仍是公開的 GitHub Pages，這不是帳號權限保護；真正敏感資料不可放入此倉庫。</p>
+  </header>
+
+  <nav class="quick" aria-label="老師快速入口">
+    <a href="#week04"><span><small>本週建議</small>第四週：Demo＋三段實作</span></a>
+    <a href="week04/teacher-notes.md"><span><small>教師小抄</small>第四週授課節奏與巡視</span></a>
+    <a href="https://github.com/GMThu/aspnet-course" target="_blank" rel="noopener"><span><small>教材維護</small>GitHub 教材倉庫 ↗</span></a>
+  </nav>
+
+  <section aria-labelledby="teacher-weeks">
+    <h2 id="teacher-weeks">每週教師總覽</h2>
+
+    <article class="week-card" id="week01">
+      <div class="week-label">WEEK 01 · 課程觀念</div>
+      <h3>從校園問題到網站應用 <span class="status">尚無獨立教師小抄</span></h3>
+      <p>先讓學生建立瀏覽器、後端、資料庫與需求描述的共同語言，再用問題提案收束。</p>
+      <div class="links"><a class="button" href="week01/">投影網頁簡報</a><a class="button secondary" href="week01/ASP.NET-Week01.pdf">PDF 講義</a></div>
+      <details><summary>老師提示與解答位置</summary><ul><li>第 18 頁是故意有錯的報名模型，可用來引導學生找問題。</li><li>第 25 頁是問題提案表；第 27 頁可展開課堂檢核答案。</li><li>提案草稿只存在目前瀏覽器，不會上傳；共用電腦提醒學生清除。</li></ul></details>
+    </article>
+
+    <article class="week-card" id="week02">
+      <div class="week-label">WEEK 02 · 安裝實作</div>
+      <h3>Windows 開發環境安裝 <span class="status">尚無獨立教師小抄</span></h3>
+      <p>本週以每位學生實際完成安裝與驗證為主，不把「看到安裝完成」當成網站與資料庫都可用。</p>
+      <div class="links"><a class="button" href="week02/">投影安裝教材</a><a class="button secondary" href="week02/ASP.NET-Week02.pdf">PDF 講義</a></div>
+      <details><summary>老師巡視重點</summary><ul><li>確認 Visual Studio、.NET、SQL Server 與 SSMS 都是課程指定版本。</li><li>至少驗證第一個網站能啟動，以及資料庫工具能連線。</li><li>遇到卡關時先記錄學生停在哪一步，不讓全班同時重裝所有工具。</li></ul></details>
+    </article>
+
+    <article class="week-card" id="week03">
+      <div class="week-label">WEEK 03 · HTML 基礎</div>
+      <h3>從 HTML 到活動介紹頁 <span class="status">雙版本</span></h3>
+      <p>任務闖關版適合課堂操作；完整教材原版保留詳細解說與延伸內容。上課前先決定本班使用哪一版。</p>
+      <div class="links"><a class="button" href="week03-mission/">任務闖關版</a><a class="button secondary" href="week03/">完整教材原版</a><a class="button secondary" href="week03/ASP.NET-Week03.pdf">原版 PDF</a><a class="button secondary" href="week03-mission/materials/Week03-mission-student.zip">任務版學生包</a><a class="button secondary" href="week03/materials/Week03-student.zip">原版學生包</a></div>
+      <details><summary>老師提示與驗收界線</summary><ul><li>任務版進度只保存在學生目前瀏覽器的 <code>localStorage</code>。</li><li>HTML 自動檢查站不會修改學生專案；最終結果仍需在學生的 localhost 實際驗收。</li><li>最終 Boss 完成後，要求學生現場說明自己修改的標籤與畫面變化。</li></ul></details>
+    </article>
+
+    <article class="week-card" id="week04">
+      <div class="week-label">WEEK 04 · CSS × BOOTSTRAP × AI</div>
+      <h3>網站改造大作戰 <span class="status">有教師小抄</span></h3>
+      <p>先看預期成品，再走短講解、學生實作、快速驗收；Demo 只定義完成條件，不要求所有學生做成同一配色。</p>
+      <div class="links"><a class="button" href="week04/">投影互動簡報</a><a class="button answer" href="week04/teacher-notes.md">教師小抄／重要提示</a><a class="button secondary" href="week04/materials/demo-complete.html">預期成品 Demo</a><a class="button secondary" href="week04/materials/Week04-student.zip">學生任務包</a></div>
+      <details open><summary>本週上課前必看</summary><ul><li>第 2 頁先展示桌機版與 390px 手機版 Demo，提醒學生配色可以不同。</li><li>三段實作在第 8、13、18 頁，時間分別為 15、20、20 分鐘。</li><li>巡視時看學生是否從起始檔修改，而不是直接複製 Demo。</li><li>驗收需看實際畫面、可點按鈕與 390px 不橫向捲動；只看程式碼不算完成。</li></ul></details>
+    </article>
+  </section>
+
+  <section aria-labelledby="separation">
+    <h2 id="separation">兩版使用原則</h2>
+    <div class="policy"><article><h3>給學生</h3><p>只分享課程根網址。學生版提供簡報、PDF、學生任務包與可公開的預期成品 Demo。</p></article><article><h3>老師自己留存</h3><p>收藏 <code>teacher.html</code>。教師小抄、解答位置、故意錯誤與巡視提醒都從老師版進入。</p></article></div>
+  </section>
+
+  <footer>GMThu · ASP.NET 課程 · 老師版總覽<br>入口區分不等於存取控制；不得存放真實個資、帳密、API 金鑰或未公開成績。</footer>
+</main>
+<script>
+  (() => {
+    const ACCESS_KEY = "aspnet-teacher-access-v1";
+    const EXPECTED_HASH = "6749cc426d5c6b9e48e048a52513bccec39b8d63d1626fd60c436b026b22929d";
+    const gate = document.getElementById("teacher-gate");
+    const content = document.getElementById("teacher-content");
+    const form = document.getElementById("teacher-gate-form");
+    const input = document.getElementById("teacher-passcode");
+    const error = document.getElementById("gate-error");
+
+    const unlock = () => {
+      gate.hidden = true;
+      content.hidden = false;
+      document.title = "東海 ASP.NET｜老師版總覽";
+    };
+
+    const lock = () => {
+      sessionStorage.removeItem(ACCESS_KEY);
+      content.hidden = true;
+      gate.hidden = false;
+      input.value = "";
+      error.textContent = "";
+      document.title = "教師版通關｜東海 ASP.NET";
+      input.focus();
+      window.scrollTo(0, 0);
+    };
+
+    const digest = async (value) => {
+      const data = new TextEncoder().encode(value);
+      const hash = await crypto.subtle.digest("SHA-256", data);
+      return Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, "0")).join("");
+    };
+
+    if (sessionStorage.getItem(ACCESS_KEY) === EXPECTED_HASH) unlock();
+    else document.title = "教師版通關｜東海 ASP.NET";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      error.textContent = "";
+      try {
+        const candidate = await digest(input.value);
+        if (candidate === EXPECTED_HASH) {
+          sessionStorage.setItem(ACCESS_KEY, candidate);
+          unlock();
+        } else {
+          input.select();
+          error.textContent = "通關密碼不正確，請再試一次。";
+        }
+      } catch {
+        error.textContent = "目前瀏覽器無法執行通關檢查，請改用最新版瀏覽器。";
+      }
+    });
+
+    document.getElementById("lock-teacher").addEventListener("click", lock);
+  })();
+</script>
+</body>
+</html>
