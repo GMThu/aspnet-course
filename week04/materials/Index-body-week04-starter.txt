@@ -1,0 +1,40 @@
+<!--
+第四週 ASP.NET Razor 內容起始檔
+請保留 Index.cshtml 原本頂端的 @page、@model 與 @{ ... }。
+只用下面內容替換原本的顯示區域。
+-->
+
+<div class="container py-4">
+  <section class="activity-hero p-4 mb-4">
+    <p class="activity-kicker">校園活動</p>
+    <h1>東海夜間攝影</h1>
+    <p>一起探索夜晚的東海校園，新手也能參加。</p>
+  </section>
+
+  <div class="card shadow-sm mb-4 activity-card">
+    <img src="/images/campus-night.svg"
+         class="card-img-top img-fluid"
+         alt="月光下的東海校園步道與拿著相機的學生">
+
+    <div class="card-body">
+      <h2 class="card-title">活動介紹</h2>
+      <p class="card-text">我們會從路思義教堂出發，練習觀察光線與構圖。</p>
+
+      <h2 class="h4 mt-4">攜帶物品</h2>
+      <ul>
+        <li>手機或相機</li>
+        <li>飲用水</li>
+        <li>請自行增加一項</li>
+      </ul>
+
+      <a class="btn btn-primary mt-2"
+         href="https://gmthu.github.io/aspnet-course/">
+        查看課程首頁
+      </a>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" role="alert">
+    活動提醒：集合前請先確認當天天氣。
+  </div>
+</div>

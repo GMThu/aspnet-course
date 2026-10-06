@@ -1,0 +1,45 @@
+/*
+第四週 site.css 起始內容
+請加在既有 wwwroot/css/site.css 的最後方，不要修改 bootstrap.min.css。
+*/
+
+.activity-hero {
+  /* 第一關：選一組自己的背景與文字顏色 */
+  background-color: #102f43;
+  color: #fff8df;
+  border-radius: 20px;
+}
+
+.activity-hero h1 {
+  font-weight: 800;
+}
+
+.activity-kicker {
+  color: #dff38f;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.activity-card {
+  /* 第五關：至少自行修改兩項，例如圓角、邊框或陰影 */
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.activity-card .card-img-top {
+  max-height: 360px;
+  object-fit: cover;
+}
+
+/*
+選做：替自己的按鈕加入柔和變化。
+先完成五關，再移除註解。
+
+.activity-card .btn {
+  transition: transform 0.18s ease;
+}
+
+.activity-card .btn:hover {
+  transform: translateY(-2px);
+}
+*/
