@@ -11,6 +11,7 @@
 - [第三週任務闖關版](https://gmthu.github.io/aspnet-course/week03-mission/)
 - [第三週完整教材原版](https://gmthu.github.io/aspnet-course/week03/)
 - [第四週 CSS × Bootstrap 互動教材](https://gmthu.github.io/aspnet-course/week04/)
+- [第四週 PDF 講義](https://gmthu.github.io/aspnet-course/week04/ASP.NET-Week04.pdf)
 
 ## 課程安排
 
