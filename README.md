@@ -12,6 +12,9 @@
 - [第三週完整教材原版](https://gmthu.github.io/aspnet-course/week03/)
 - [第四週 CSS × Bootstrap 互動教材](https://gmthu.github.io/aspnet-course/week04/)
 - [第四週 PDF 講義](https://gmthu.github.io/aspnet-course/week04/ASP.NET-Week04.pdf)
+- [第五週 Razor Pages 表單互動教材](https://gmthu.github.io/aspnet-course/week05/)
+- [第五週 PDF 講義](https://gmthu.github.io/aspnet-course/week05/ASP.NET-Week05.pdf)
+- [第五週預期行為 Demo](https://gmthu.github.io/aspnet-course/week05/materials/demo-complete.html)
 
 ## 課程安排
 
@@ -58,6 +61,12 @@ week01/ASP.NET-Week01.pdf       第一週列印講義
 week03/index.html               第三週完整教材原版（保留）
 week03-mission/index.html       第三週任務闖關版
 week03-mission/materials/       闖關版學生素材與下載包
+week04/index.html               第四週 CSS × Bootstrap × AI 互動教材
+week04/teacher-notes.md         第四週教師授課小抄
+week05/index.html               第五週 Razor Pages 表單流程互動教材
+week05/ASP.NET-Week05.pdf       第五週列印講義
+week05/teacher-notes.md         第五週逐頁授課小抄
+week05/materials/               第五週學生包、Demo 與教師 Boss 卡
 ```
 
 ## 第三週雙版本
