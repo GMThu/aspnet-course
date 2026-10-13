@@ -21,6 +21,19 @@
 
 ## 上課前（約 5 分鐘）
 
+### 教師完整 ASP.NET 專案
+
+教師包另附 `teacher/Week05-Teacher-Project.zip`，解壓後以 Visual Studio 2026 開啟 `Week05TeacherDemo.csproj`，即可直接執行完整 Razor Pages 範例。專案內含：
+
+- `Pages/Index.cshtml`：真正的 ASP.NET 表單畫面。
+- `Pages/Index.cshtml.cs`：POST、Model Binding、DataAnnotations 與 ModelState。
+- `wwwroot/css/site.css`：桌機與手機版面。
+- `preview.html`：沒有 .NET SDK 時可先看的靜態畫面；它不能取代 localhost 驗證。
+- `README.html`：Windows 解壓後可直接雙擊閱讀的網頁說明。
+- `README.md`：同一份說明的 Markdown 原始檔。
+
+上課建議先用完整專案示範一次，再讓學生從起始片段逐步完成，避免學生只複製完整答案。
+
 1. 開啟第 2 頁的預期成品 Demo。
 2. 依序按「測試空白」「測試錯誤 Email」「填入正確假資料」。
 3. 切到 390px，確認沒有水平捲動。
