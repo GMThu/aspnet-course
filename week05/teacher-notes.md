@@ -18,6 +18,7 @@
 4. 以 `ModelState.IsValid` 阻止錯誤資料進入成功區。
 5. 親自完成空白、錯誤 Email、合法資料三條測試。
 6. 沿五站資料路線說明發生問題的位置。
+7. 在需要時指出 Razor Pages 專案中畫面、C# 處理與 CSS 的位置。
 
 ## 上課前（約 5 分鐘）
 
@@ -99,6 +100,21 @@ Boss 無法在當節全部驗完時，優先驗收三條測試，不壓縮學生
 | 26 | 同儕只回報現象，不替對方改 |
 | 27 | 分級情境式 Boss |
 | 28 | 收束並橋接清單與資料庫 |
+| 29 | 選讀補充：專案根目錄與檔案分工 |
+| 30 | 選讀補充：本週修改範圍與勿手改目錄 |
+
+## 專案結構補充（第 29–30 頁）
+
+這兩頁不占三節課主線。學生找不到檔案、混淆 `cshtml` 與 `cshtml.cs`，或提早完成時再開。
+
+- `Pages/*.cshtml`：畫面、表單與顯示結果。
+- `Pages/*.cshtml.cs`：PageModel、Input、OnPost 與驗證。
+- `wwwroot/css/`：瀏覽器可取得的樣式。
+- `Program.cs`：啟動與服務設定；本週只需認得用途。
+- `appsettings.json`、`.csproj`、`Properties/launchSettings.json`：有明確需求時才修改。
+- `bin/`、`obj/`：建置產生，不手動編輯。
+
+補充完成條件：學生能在自己的專案中指出「畫面、C# 處理、CSS」三處位置，並說明 `Index.cshtml` 與 `Index.cshtml.cs` 共同完成同一個 Razor Page。
 
 ## 常見問題與處理順序
 
