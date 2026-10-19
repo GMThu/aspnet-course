@@ -1,0 +1,24 @@
+@* 第三節：建立 Input 與 OnPost 後，放在表單區塊旁或下方。 *@
+
+@if (Model.Submitted)
+{
+    <section class="alert alert-success registration-result" role="status">
+        <h2 class="h4">報名資料已收到</h2>
+        <dl class="mb-3">
+            <dt>參加者</dt>
+            <dd>@Model.Input.DisplayName</dd>
+            <dt>Email</dt>
+            <dd>@Model.Input.Email</dd>
+            <dt>場次</dt>
+            <dd>@Model.Input.Session</dd>
+            <dt>備註</dt>
+            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? "無" : Model.Input.Note)</dd>
+        </dl>
+        <p class="mb-0"><strong>本週限制：</strong>資料尚未驗證，也尚未寫入資料庫。</p>
+    </section>
+}
+
+@* 同一輪再把純 HTML 欄位改成 asp-for，例如：
+<label asp-for="Input.DisplayName" class="form-label">顯示名稱</label>
+<input asp-for="Input.DisplayName" class="form-control">
+*@

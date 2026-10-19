@@ -1,0 +1,77 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "活動報名";
+}
+
+<header class="hero">
+    <p class="eyebrow">WEEK 06 · RAZOR PAGES FORM FLOW</p>
+    <h1>活動報名表：<br />錯的擋住，對的收到。</h1>
+    <p>這份教師版專案展示 Browser → POST → Model Binding → Validation → Razor Page。資料只在本次回應中顯示，尚未寫入資料庫。</p>
+</header>
+
+<div class="notice"><strong>課堂示範請使用假資料。</strong>不要輸入真實 Email、密碼、連線字串或 API key。</div>
+
+<div class="content-grid">
+    <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">校園攝影散步報名</h2>
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div>
+
+            <div class="field">
+                <label asp-for="Input.DisplayName"></label>
+                <input asp-for="Input.DisplayName" autocomplete="off" />
+                <span asp-validation-for="Input.DisplayName" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" autocomplete="off" />
+                <span asp-validation-for="Input.Email" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Input.Session"></label>
+                <select asp-for="Input.Session">
+                    <option value="">請選擇參加場次</option>
+                    <option value="週三晚上">週三晚上</option>
+                    <option value="週六下午">週六下午</option>
+                </select>
+                <span asp-validation-for="Input.Session" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Input.Note">備註（選填，最多 100 字）</label>
+                <textarea asp-for="Input.Note" rows="4"></textarea>
+                <span asp-validation-for="Input.Note" class="field-error"></span>
+            </div>
+
+            <button type="submit">送出報名</button>
+        </form>
+    </section>
+
+    <aside>
+        @if (Model.Submitted)
+        {
+            <section class="card success" aria-live="polite">
+                <h2>報名資料已收到</h2>
+                <dl>
+                    <dt>參加者</dt><dd>@Model.Input.DisplayName</dd>
+                    <dt>Email</dt><dd>@Model.Input.Email</dd>
+                    <dt>場次</dt><dd>@Model.Input.Session</dd>
+                    <dt>備註</dt><dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? "無" : Model.Input.Note)</dd>
+                </dl>
+                <p><strong>本週限制：</strong>資料尚未寫入資料庫。</p>
+            </section>
+        }
+
+        <section class="card checklist">
+            <h2>上課驗收三條路</h2>
+            <ol>
+                <li>必填欄全空：顯示三個錯誤，不出現成功摘要。</li>
+                <li>Email 輸入 <code>abc</code>：顯示格式錯誤。</li>
+                <li>合法假資料：摘要與輸入內容一致。</li>
+            </ol>
+        </section>
+    </aside>
+</div>

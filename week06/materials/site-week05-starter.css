@@ -1,0 +1,38 @@
+/* 加到既有 wwwroot/css/site.css 最後方；不要修改 bootstrap.min.css。 */
+.activity-hero {
+    padding: 2rem;
+    border-radius: 1rem;
+    color: #f7fbff;
+    background: #123d54;
+}
+
+.activity-hero p:first-child {
+    color: #dff38f;
+    letter-spacing: .08em;
+}
+
+.week05-reminder {
+    padding: 1.5rem;
+    border: 1px solid #b6c5d0;
+    border-radius: .75rem;
+    background: #f7f9fa;
+}
+
+.registration-result dt {
+    font-weight: 700;
+}
+
+.registration-result dd {
+    margin-bottom: .75rem;
+}
+
+.field-validation-error {
+    display: block;
+    margin-top: .35rem;
+}
+
+@media (max-width: 575.98px) {
+    .activity-hero {
+        padding: 1.25rem;
+    }
+}

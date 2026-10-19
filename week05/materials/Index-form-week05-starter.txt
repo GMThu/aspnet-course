@@ -1,0 +1,42 @@
+@* 保留自己檔案頂端既有的 @page、@model 與 @{ ... }。只替換首頁內容區。 *@
+
+<section class="activity-hero mb-4">
+    <p class="text-uppercase fw-bold mb-2">校園活動報名</p>
+    <h1>東海夜間攝影散步</h1>
+    <p class="lead mb-0">先完成可編譯、可操作的 POST 表單；下一輪再接上 PageModel。</p>
+</section>
+
+<section class="card shadow-sm">
+    <div class="card-body p-4">
+        <h2 class="h4">填寫報名資料</h2>
+        <form method="post">
+            <div class="mb-3">
+                <label for="displayName" class="form-label">顯示名稱</label>
+                <input id="displayName" name="Input.DisplayName" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" name="Input.Email" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="session" class="form-label">參加場次</label>
+                <select id="session" name="Input.Session" class="form-select">
+                    <option value="">請選擇參加場次</option>
+                    <option value="週三晚上">週三晚上</option>
+                    <option value="週六下午">週六下午</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="note" class="form-label">備註</label>
+                <textarea id="note" name="Input.Note" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">送出報名</button>
+        </form>
+    </div>
+</section>
+
+@* 第二節停點：這份內容不引用尚未建立的 Input 屬性，因此專案仍須能編譯。 *@

@@ -13,34 +13,29 @@
                 <h2 class="h4">填寫報名資料</h2>
 
                 <form method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                     <div class="mb-3">
-                        <label asp-for="Input.DisplayName" class="form-label"></label>
+                        <label asp-for="Input.DisplayName" class="form-label">顯示名稱</label>
                         <input asp-for="Input.DisplayName" class="form-control">
-                        <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label asp-for="Input.Email" class="form-label"></label>
+                        <label asp-for="Input.Email" class="form-label">Email</label>
                         <input asp-for="Input.Email" class="form-control">
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label asp-for="Input.Session" class="form-label"></label>
+                        <label asp-for="Input.Session" class="form-label">參加場次</label>
                         <select asp-for="Input.Session" class="form-select">
                             <option value="">請選擇參加場次</option>
                             <option value="週三晚上">週三晚上</option>
                             <option value="週六下午">週六下午</option>
                         </select>
-                        <span asp-validation-for="Input.Session" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label asp-for="Input.Note" class="form-label"></label>
+                        <label asp-for="Input.Note" class="form-label">備註</label>
                         <textarea asp-for="Input.Note" class="form-control" rows="3"></textarea>
-                        <span asp-validation-for="Input.Note" class="text-danger"></span>
                     </div>
 
                     <button type="submit" class="btn btn-primary">送出報名</button>
@@ -73,7 +68,7 @@
                 <h2 class="h5">送出前先確認</h2>
                 <ul class="mb-0">
                     <li>只使用課堂假資料。</li>
-                    <li>錯誤資料應顯示原因。</li>
+                    <li>本週先確認後端收到資料。</li>
                     <li>成功摘要要與輸入一致。</li>
                 </ul>
             </aside>

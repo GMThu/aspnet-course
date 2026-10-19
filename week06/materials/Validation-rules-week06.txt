@@ -1,0 +1,31 @@
+// Index.cshtml.cs 頂端加入：
+using System.ComponentModel.DataAnnotations;
+
+// 用以下版本取代第五週的 RegistrationInput。
+public class RegistrationInput
+{
+    [Required(ErrorMessage = "請輸入顯示名稱")]
+    [StringLength(20, ErrorMessage = "顯示名稱最多 20 字")]
+    public string DisplayName { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "請輸入 Email")]
+    [EmailAddress(ErrorMessage = "Email 格式不正確")]
+    public string Email { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "請選擇參加場次")]
+    public string Session { get; set; } = string.Empty;
+
+    [StringLength(100, ErrorMessage = "備註最多 100 字")]
+    public string? Note { get; set; }
+}
+
+// 用以下內容取代第五週的 OnPost。
+public void OnPost()
+{
+    if (!ModelState.IsValid)
+    {
+        return;
+    }
+
+    Submitted = true;
+}

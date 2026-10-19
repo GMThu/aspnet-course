@@ -1,62 +1,38 @@
 # 第五週｜讓表單真的收到資料
 
-## 今天的任務
+## 本週只完成一件事
 
-延續第四週的活動宣傳頁，加入一個真正會 POST 到 Razor Page 的報名表。完成後，錯誤資料會停在表單並顯示原因，合法資料會顯示報名摘要。
+從零建立或沿用 Razor Pages 專案，讓瀏覽器表單經過 POST、Model Binding、OnPost，最後在 Razor 顯示成功摘要。
 
-> 本週只完成「接收與驗證」。資料尚未寫入資料庫，請勿宣稱已保存報名紀錄。
+> 本週不加入驗證、不接資料庫。空白或格式錯誤仍可能被收到；第六週才處理「收到不等於接受」。
 
-## 使用前
+## 從哪裡開始
 
-1. 啟動第四週的 ASP.NET Razor Pages 專案。
-2. 確認首頁仍能在 localhost 顯示。
-3. 備份 `Pages/Index.cshtml`、`Pages/Index.cshtml.cs`、`wwwroot/css/site.css`。
+1. 沒有專案：先讀 `START-HERE.md`。
+2. 已有專案：確認 localhost 能停止後再次啟動。
+3. 備份目前的 `Pages/Index.cshtml`、`Pages/Index.cshtml.cs`、`wwwroot/css/site.css`。
 4. 解壓縮整個學生包，不要直接在 ZIP 內編輯。
-5. 使用課堂假資料，不輸入真實 Email、電話、密碼、連線字串或 API key。
+5. 全程只使用課堂假資料。
 
-## 檔案用途
+## 練習一｜建立可編譯表單
 
-- `Index-body-week05-starter.txt`：放進 `Pages/Index.cshtml` 的內容區；保留原本 `@page`、`@model`。
-- `RegistrationInput-and-handler.txt`：參考後貼入既有的 `IndexModel` 類別內；不要覆蓋自己的 namespace。
-- `site-week05-starter.css`：加到既有 `wwwroot/css/site.css` 最後方。
-- `AI-debug-prompt.md`：表單除錯時的最小提問模板。
-- `demo-complete.html`：預期行為 Demo，可切換成功／失敗情境；它不是 ASP.NET，也不能取代學生專案。
+1. 使用 `Index-form-week05-starter.txt` 替換首頁內容區。
+2. 把 `site-week05-starter.css` 追加到 `wwwroot/css/site.css`。
+3. 確認專案仍可編譯、Tab 可操作、label 可對焦、390px 無整頁水平捲動。
 
-## 三輪實作
+此階段使用純 HTML 的 `name="Input.*"` 預留後端地址，不引用尚未建立的 C# 屬性。
 
-### 練習一｜建立表單畫面
+## 練習二｜讓後端收到
 
-- 加入 form、名稱、Email、場次、備註與送出按鈕。
-- 每個欄位都有 label 與 `asp-for`。
-- Tab 可依序操作；390px 不出現水平捲動。
+1. 把 `RegistrationInput-and-handler.txt` 的成員放進既有 `IndexModel`。
+2. 把純 HTML 欄位改成 `asp-for="Input.*"`。
+3. 加入 `Index-result-week05.txt` 的成功摘要。
+4. 用兩組不同假資料確認摘要跟著改變。
 
-### 練習二｜讓後端收到
+## 最終驗收
 
-- 建立 `RegistrationInput`。
-- 加入 `[BindProperty]`、`OnPost()` 與 `Submitted`。
-- 用兩組不同假資料確認成功摘要會跟著改變。
-
-### 練習三｜加入驗證
-
-- 名稱：必填，最多 20 字。
-- Email：必填，格式正確。
-- 場次：必選。
-- 先檢查 `ModelState.IsValid`，通過後才顯示成功摘要。
-
-## 必測三條路
-
-1. 所有必填欄空白：顯示錯誤，不顯示成功摘要。
-2. Email 輸入 `abc`：顯示格式錯誤。
-3. 使用合法假資料：顯示內容一致的成功摘要。
-
-## 卡住時依序檢查
-
-1. `form` 是否真的使用 `method="post"`。
-2. 欄位與按鈕是否都在 form 裡。
-3. `asp-for` 是否對到正確的 `Input` 屬性。
-4. `Input` 是否有 `[BindProperty]`。
-5. `OnPost()` 是否存在。
-6. 是否先檢查 `ModelState.IsValid`。
-7. Razor 成功區是否讀取正確屬性。
-
-完成不是「AI 說可以」，而是自己的 localhost 實際通過三條測試，並能說明資料經過：瀏覽器 → POST → Binding → Validation → Razor Page。
+- [ ] 專案停止後能再次啟動。
+- [ ] 表單階段與接後端後都沒有 Build error。
+- [ ] 兩組不同假資料都能出現在成功摘要。
+- [ ] 能說出：瀏覽器 → POST → Binding → OnPost → Razor。
+- [ ] 能說明「後端收到」不等於「資料已驗證或保存」。

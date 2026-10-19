@@ -1,0 +1,20 @@
+// 將以下成員放進既有的 IndexModel 類別內。
+// 檔案頂端需要：using Microsoft.AspNetCore.Mvc;
+
+[BindProperty]
+public RegistrationInput Input { get; set; } = new();
+
+public bool Submitted { get; set; }
+
+public void OnPost()
+{
+    Submitted = true;
+}
+
+public class RegistrationInput
+{
+    public string DisplayName { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Session { get; set; } = string.Empty;
+    public string? Note { get; set; }
+}

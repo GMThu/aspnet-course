@@ -1,0 +1,11 @@
+@* 放在 form 開始標籤後： *@
+<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+@* 每個欄位的 input／select／textarea 後加入對應訊息，例如： *@
+<span asp-validation-for="Input.DisplayName" class="text-danger"></span>
+<span asp-validation-for="Input.Email" class="text-danger"></span>
+<span asp-validation-for="Input.Session" class="text-danger"></span>
+<span asp-validation-for="Input.Note" class="text-danger"></span>
+
+@* 教學時若要固定看到後端驗證，可暫時讓 form 使用 novalidate： *@
+<form method="post" novalidate>

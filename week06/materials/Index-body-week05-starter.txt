@@ -1,0 +1,82 @@
+@* 保留自己檔案頂端既有的 @page、@model 與 @{ ... }。只替換首頁內容區。 *@
+
+<section class="activity-hero mb-4">
+    <p class="text-uppercase fw-bold mb-2">校園活動報名</p>
+    <h1>東海夜間攝影散步</h1>
+    <p class="lead mb-0">完成表單後，ASP.NET 會接收並檢查這次輸入。</p>
+</section>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <section class="card shadow-sm">
+            <div class="card-body p-4">
+                <h2 class="h4">填寫報名資料</h2>
+
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.DisplayName" class="form-label"></label>
+                        <input asp-for="Input.DisplayName" class="form-control">
+                        <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <input asp-for="Input.Email" class="form-control">
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Session" class="form-label"></label>
+                        <select asp-for="Input.Session" class="form-select">
+                            <option value="">請選擇參加場次</option>
+                            <option value="週三晚上">週三晚上</option>
+                            <option value="週六下午">週六下午</option>
+                        </select>
+                        <span asp-validation-for="Input.Session" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Note" class="form-label"></label>
+                        <textarea asp-for="Input.Note" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Input.Note" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">送出報名</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-lg-5">
+        @if (Model.Submitted)
+        {
+            <section class="alert alert-success registration-result" role="status">
+                <h2 class="h4">報名資料已收到</h2>
+                <dl class="mb-3">
+                    <dt>參加者</dt>
+                    <dd>@Model.Input.DisplayName</dd>
+                    <dt>Email</dt>
+                    <dd>@Model.Input.Email</dd>
+                    <dt>場次</dt>
+                    <dd>@Model.Input.Session</dd>
+                    <dt>備註</dt>
+                    <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? "無" : Model.Input.Note)</dd>
+                </dl>
+                <p class="mb-0"><strong>本週限制：</strong>資料尚未寫入資料庫。</p>
+            </section>
+        }
+        else
+        {
+            <aside class="week05-reminder">
+                <h2 class="h5">送出前先確認</h2>
+                <ul class="mb-0">
+                    <li>只使用課堂假資料。</li>
+                    <li>錯誤資料應顯示原因。</li>
+                    <li>成功摘要要與輸入一致。</li>
+                </ul>
+            </aside>
+        }
+    </div>
+</div>
