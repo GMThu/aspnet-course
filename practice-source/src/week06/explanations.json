@@ -226,8 +226,8 @@
         },
         {
           "line": 17,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 18,
@@ -321,8 +321,8 @@
         },
         {
           "line": 36,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 37,
@@ -672,8 +672,8 @@
         },
         {
           "line": 17,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 18,
@@ -767,8 +767,8 @@
         },
         {
           "line": 36,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 37,
@@ -1158,8 +1158,8 @@
         },
         {
           "line": 17,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 18,
@@ -1253,8 +1253,8 @@
         },
         {
           "line": 36,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 37,
@@ -1664,8 +1664,8 @@
         },
         {
           "line": 17,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 18,
@@ -1759,8 +1759,8 @@
         },
         {
           "line": 36,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 37,
@@ -2175,8 +2175,8 @@
         },
         {
           "line": 18,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 19,
@@ -2285,8 +2285,8 @@
         },
         {
           "line": 40,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 41,
@@ -2706,8 +2706,8 @@
         },
         {
           "line": 18,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 19,
@@ -2816,8 +2816,8 @@
         },
         {
           "line": 40,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 41,
@@ -3237,8 +3237,8 @@
         },
         {
           "line": 18,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 19,
@@ -3347,8 +3347,8 @@
         },
         {
           "line": 40,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 41,
@@ -3768,8 +3768,8 @@
         },
         {
           "line": 18,
-          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
-          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\" maxlength=\"200\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 19,
@@ -3878,8 +3878,8 @@
         },
         {
           "line": 40,
-          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
-          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\" maxlength=\"200\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。 maxlength=\"200\" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。"
         },
         {
           "line": 41,

@@ -1,4 +1,4 @@
-Downloaded published starter; SHA256 413a6bfead4eaed37273492cc7884fa69b245c8b833a49356d7505c5a9e00dc6
+Local release candidate starter; SHA256 dfac6940d66e81e257e7720d71204982c45228bb886fa86c08a282bd82be78e1
 Step 00: sequential edits + build + CSS + 12 chained POST cases PASS
 Step 01: sequential edits + build + CSS + 12 chained POST cases PASS
 Step 02: sequential edits + build + CSS + 12 chained POST cases PASS

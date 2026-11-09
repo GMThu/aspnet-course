@@ -81,6 +81,7 @@ def explain(source,kind,week=6):
     if '<strong>' in t:why='顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。'
     elif 'text-uppercase' in t:why='顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。'
     else:why='顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。'
+  if kind=='form' and 'maxlength="200"' in t:why+=' maxlength="200" 明訂瀏覽器最多輸入 200 字，讓教學能送出 21／101 字；後端仍按 20／100 字拒絕，novalidate 不會取消 maxlength。'
   if kind=='form' and t.startswith('<section ') and 'card shadow-sm' in t:why='開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。'
   if kind=='form' and t.startswith('<section ') and 'role="status"' in t:why='開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role="status" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。'
   if week==5:

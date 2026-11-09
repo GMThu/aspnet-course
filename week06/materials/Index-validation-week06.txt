@@ -13,3 +13,9 @@
    下方只是開始標籤，原有欄位和結束標籤 </form> 必須保留。
    完整可貼檔案：https://gmthu.github.io/aspnet-course/practice/week06/ *@
 <form method="post" novalidate>
+
+
+@* 邊界測試：替換原有對應欄位，不要新增第二份。
+   前端200讓21／101字可輸入；後端仍保留StringLength(20)／(100)。 *@
+<input asp-for="Input.DisplayName" class="form-control" maxlength="200">
+<textarea asp-for="Input.Note" class="form-control" rows="3" maxlength="200"></textarea>

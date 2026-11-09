@@ -6,9 +6,9 @@ env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1')
 env.pop('ASPNETCORE_ENVIRONMENT',None)
 results=[]
 with tempfile.TemporaryDirectory(prefix='week06-steps-',dir=root) as td:
- downloaded=urllib.request.urlopen('https://gmthu.github.io/aspnet-course/practice/downloads/Week06-starter.zip').read()
+ downloaded=(root/'downloads/Week06-starter.zip').read_bytes() if os.environ.get('LOCAL_STARTER')=='1' else urllib.request.urlopen('https://gmthu.github.io/aspnet-course/practice/downloads/Week06-starter.zip').read()
  assert downloaded==(root/'downloads/Week06-starter.zip').read_bytes(), 'Published starter differs from source'
- results.append('Downloaded published starter; SHA256 '+hashlib.sha256(downloaded).hexdigest())
+ results.append(('Local release candidate starter; SHA256 ' if os.environ.get('LOCAL_STARTER')=='1' else 'Downloaded published starter; SHA256 ')+hashlib.sha256(downloaded).hexdigest())
  with zipfile.ZipFile(io.BytesIO(downloaded)) as z:z.extractall(td)
  p=Path(td)/'Week06Validation'
  checkpoints=json.loads((root/'src/week06/checkpoints.json').read_text())
@@ -28,6 +28,8 @@ with tempfile.TemporaryDirectory(prefix='week06-steps-',dir=root) as td:
     except Exception:time.sleep(.1)
    else:raise RuntimeError('Server failed to start')
    page=client.open(url).read().decode()
+   assert re.search(r'<input[^>]*maxlength="200"[^>]*name="Input.DisplayName"',page), 'Name must allow browser boundary testing'
+   assert re.search(r'<textarea[^>]*maxlength="200"[^>]*name="Input.Note"',page), 'Note must allow browser boundary testing'
    assert 'novalidate' in page
    assert '_ValidationScriptsPartial' not in page
    for asset in ['/css/site.css','/lib/bootstrap/dist/css/bootstrap.min.css']:

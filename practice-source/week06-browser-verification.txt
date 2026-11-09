@@ -1,0 +1,11 @@
+Browser verification via actual keyboard input (macOS in-app browser / .NET 10):
+Before fix: generated maxlength=20 (name), maxlength=100 (note); typing 21 letters retained only 20. Reproduced.
+After fix: name maxlength=200; typing 21 letters retained all 21; submit showed name-length error and no success summary.
+20-letter name + valid Email + Wednesday session: success summary shown.
+101-letter note typed in two batches (83 + 18): note-length error and no success summary.
+Backend version, fresh empty form submitted: all 3 Chinese required messages; no success summary.
+Native frontend version, fresh empty form submitted: focused first required field; native valueMissing and validation message; no new server-rendered errors.
+Native frontend version, all required fields valid: success summary shown.
+Guide comparison section rendered; no horizontal overflow.
+Slides 17 and 24 content ended above footer at 1280x720.
+Windows Visual Studio UI not executed. Screen illustrations in guide are labelled as illustrations.
