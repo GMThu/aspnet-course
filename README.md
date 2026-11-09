@@ -110,3 +110,12 @@ uv run --with pymupdf python tools/check_pdf_links.py https://gmthu.github.io/as
 - 報名示範為 JavaScript 教學模型，不是實際 ASP.NET、登入或資料庫。
 - 不上傳真實個資、密碼、API 金鑰或私密課務資料。
 - ASP.NET 分支與 SDK 版本於第二週依課堂環境統一。
+
+## 第五、六週圖文詳解實作版
+
+- [第五週自主實作手冊](https://gmthu.github.io/aspnet-course/practice/)
+- [第六週自主實作手冊](https://gmthu.github.io/aspnet-course/practice/week06/)
+
+新增獨立靜態手冊，含逐步操作、程式碼複製、瀏覽器本機進度、驗收與排錯，以及階段專案下載。原簡報與下載包保留。
+
+來源在 `practice-source/`；重建方式見該目錄 README。產物在 `practice/`，直接由現有 GitHub Pages 發布。
