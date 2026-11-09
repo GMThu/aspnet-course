@@ -23,3 +23,5 @@ npm run build
 `python3 tools/build_week06_checkpoints.py` 產生第 00–07 步 JSON 與完整專案 ZIP，接著執行 `npm run build`。每步提供完整後端、完整 Razor 畫面與預期結果。第 02 步刻意沒有閘門，第 07 步為 15 字實驗版。
 
 驗證：`DOTNET=/path/to/dotnet python3 tools/verify_week06_checkpoints.py`。測試每個 ZIP 建置及合法、空白、錯誤 Email、長度邊界 POST。
+
+第六週獨立起跑包：`Week06-starter.zip`，專案檔與 namespace 統一為 `Week06Validation`。第 00–07 步與完成包使用同一名稱；第五週原始下載包維持原名。已有舊版第六週資料者，請下載新包到獨立資料夾再依本版完整程式碼練習。

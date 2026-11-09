@@ -45,6 +45,7 @@ def post_tests(project,week,port):
   server.terminate();server.wait(timeout=10)
 def archive(project,name,step):
  info=f'''本包：{name}\n下一步：{step}\n\n1. ZIP 右鍵 → 全部解壓縮，到新的資料夾。不要在 ZIP 裡編輯。\n2. 找到同時有 Pages、wwwroot 與 Week05Registration.csproj 的那層。\n3. Visual Studio → 開啟專案或方案 → 選 Week05Registration.csproj。\n4. 需要 .NET 10 SDK 與 ASP.NET 與網頁程式開發工作負載；Ctrl+F5 執行。\n\n備份請放在專案資料夾外，避免備份 .cs 一起被編譯。\n本練習沒有資料庫，只使用假資料。\n第六週保留 Week05Registration 專案名稱，以延續第五週 namespace。\n'''
+ if name.startswith('Week06'): info=info.replace('Week05Registration','Week06Validation').replace('第六週保留 Week06Validation 專案名稱，以延續第五週 namespace。','第六週使用獨立 Week06Validation 專案與 namespace。')
  folder='Week06Validation' if name.startswith('Week06') else 'Week05Registration'
  with zipfile.ZipFile(ROOT/'downloads'/name,'w',zipfile.ZIP_DEFLATED) as z:
   for f in sorted(project.rglob('*')):
@@ -60,6 +61,11 @@ with tempfile.TemporaryDirectory(prefix='walkthrough-',dir=ROOT) as td:
  (p/'Pages/Index.cshtml.cs').write_text(C5['handler']);build(p,'05 backend with plain HTML form')
  (p/'Pages/Index.cshtml').write_text(C5['final']);build(p,'06 bound form and summary');post_tests(p,5,5215)
  archive(p,'Week05-03-complete.zip','第五週第 07 步驗收。也可複製本資料夾，開始第六週第 00 步。')
+ for source in list(p.rglob('*')):
+  if source.is_file() and not any(x in ['bin','obj'] for x in source.relative_to(p).parts):
+   try: source.write_text(source.read_text().replace('Week05Registration','Week06Validation'))
+   except UnicodeDecodeError: pass
+ (p/'Week05Registration.csproj').rename(p/'Week06Validation.csproj')
  (p/'Pages/Index.cshtml.cs').write_text(C6['handler']);build(p,'Week06 step03 validation backend before error UI')
  (p/'Pages/Index.cshtml').write_text(C6['form']);build(p,'Week06 step04 error UI');post_tests(p,6,5216)
  archive(p,'Week06-complete.zip','第六週第 05 步三路測試，再做第 06 步長度邊界。本包已包含驗證與錯誤訊息。')

@@ -9,7 +9,7 @@
 
 ## 開課前
 - 在 Windows 機房確認 .NET 10、Visual Studio ASP.NET 工作負載。
-- 第五週可 POST 專案先複製到 Week06Validation；保留 .csproj 與 namespace。
+- 下載 Week06-starter.zip，全部解壓縮後直接開啟 Week06Validation.csproj；不必複製或重新命名第五週。
 - 原學生 ZIP 是片段素材；新圖文版的起跑／完成 ZIP 才是完整可執行專案。
 - 本次網頁為 30 頁，既有 PDF 仍為原版；頁碼與修訂內容以網頁為準。
 
