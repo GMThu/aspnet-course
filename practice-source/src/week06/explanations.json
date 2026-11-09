@@ -50,12 +50,12 @@
         {
           "line": 10,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 11,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 12,
@@ -65,7 +65,7 @@
         {
           "line": 13,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 14,
@@ -75,7 +75,7 @@
         {
           "line": 15,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 16,
@@ -496,12 +496,12 @@
         {
           "line": 10,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 11,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 12,
@@ -511,7 +511,7 @@
         {
           "line": 13,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 14,
@@ -521,7 +521,7 @@
         {
           "line": 15,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 16,
@@ -937,17 +937,17 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 11,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 12,
@@ -962,7 +962,7 @@
         {
           "line": 14,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 15,
@@ -1423,17 +1423,17 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 11,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 12,
@@ -1448,7 +1448,7 @@
         {
           "line": 14,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 15,
@@ -1929,17 +1929,17 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 11,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 12,
@@ -1954,7 +1954,7 @@
         {
           "line": 14,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 15,
@@ -2460,17 +2460,17 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 11,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 12,
@@ -2485,7 +2485,7 @@
         {
           "line": 14,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 15,
@@ -2991,17 +2991,17 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 11,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 12,
@@ -3016,7 +3016,7 @@
         {
           "line": 14,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 15,
@@ -3522,17 +3522,17 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
         },
         {
           "line": 11,
           "code": "    public bool Submitted { get; set; }",
-          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+          "why": "給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。"
         },
         {
           "line": 12,
@@ -3547,7 +3547,7 @@
         {
           "line": 14,
           "code": "    public void OnPost()",
-          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+          "why": "表單用 method=\"post\" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。"
         },
         {
           "line": 15,
@@ -4050,12 +4050,12 @@
     {
       "line": 1,
       "code": "[BindProperty]",
-      "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+      "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
     },
     {
       "line": 2,
       "code": "public RegistrationInput Input { get; set; } = new();",
-      "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+      "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
     }
   ]
 }

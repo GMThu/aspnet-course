@@ -1,0 +1,1 @@
+export default function LineNotes({rows}:{rows:{line:number,code:string,why:string}[]}){return <ol className="line-notes">{rows.map((r,i)=><li key={i}><div className="line-source"><span aria-label={"第 "+r.line+" 行"}>{r.line}</span><code>{r.code||'（空白行）'}</code></div><p>{r.why}</p></li>)}</ol>}

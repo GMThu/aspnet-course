@@ -41,3 +41,6 @@
 
 ## 驗收界線
 第五週只驗收「收到與回應」；不要求 DataAnnotations、ModelState 或三路驗證測試，也不宣稱資料已保存。
+
+## 逐行解說
+第 11–13 頁逐行讀 HTML，第 16–19 頁讀 Razor 與 C#，第 21 頁讀摘要。完整檔案逐行解說位於學生圖文版第 04、05、06 步。RegistrationInput 與 IndexModel 同層，完整講義放在 IndexModel 結束後。GET 只顯示表單時保留 [BindProperty] 供 POST 使用；GET 自動接網址參數到屬性才用 SupportsGet = true。小寫 get/set 是屬性讀寫，不是 HTTP 方法。

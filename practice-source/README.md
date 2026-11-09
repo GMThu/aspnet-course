@@ -35,3 +35,5 @@ verify_week06_checkpoints.py 現在在同一份起跑專案依序只修改講義
 ## 逐行說明
 
 `npm run build` 會先執行 `tools/build_week06_explanations.py`，從目前 checkpoints.json 產生 explanations.json。每一行（含空行、括號、結束標籤）都有對應解說；遇到未涵蓋的新程式行會停止建置，避免解說與程式版本脫節。學生第 01 步直接顯示 Input Model 與 BindProperty 解說；各步完整程式碼區另有後端與 HTML/Razor 全檔逐行說明。複製按鈕仍只複製原本可執行程式。
+
+第五週也有逐行解說：`tools/build_week05_explanations.py` 從 code.json 產生純 HTML（42 行）、C# 後端（28 行）、完成 Razor（60 行）的說明。兩週共用 code_line_explanations.py 與 LineNotes 顯示元件；第五週保留接收資料、不驗證與不存入資料庫的教學階段。另補 [BindProperty]／SupportsGet／get-set 對照及 Input、Submitted、OnPost 如何配合畫面。建置時檢查每行說明是否齊全。
