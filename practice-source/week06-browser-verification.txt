@@ -9,3 +9,21 @@ Native frontend version, all required fields valid: success summary shown.
 Guide comparison section rendered; no horizontal overflow.
 Slides 17 and 24 content ended above footer at 1280x720.
 Windows Visual Studio UI not executed. Screen illustrations in guide are labelled as illustrations.
+
+Full student walkthrough from publicly downloaded starter (2026-11-09):
+Downloaded Week06-starter.zip from GitHub Pages; byte-identical to repository release.
+Used one extracted project and sequentially changed backend at 02/03/07 and Razor at 04.
+00/01: valid input -> received summary with exact name, Email, session and empty note shown as 無.
+02: empty POST -> received summary and no field messages (intentional intermediate stage).
+03: abc -> no summary and no messages; corrected Email -> received summary.
+04/05: empty -> three Chinese required messages/no summary; abc -> Email message; corrected -> success.
+06: actual sequential key input 20 -> success; additional U retained (length21) -> name error/no summary.
+06: actual sequential key input 4x25 A -> length100/success; additional A retained (length101) -> note error/no summary.
+07: 15 -> success; additional P -> 16/name error/no summary.
+Restored backend20: 20 -> success, 21 -> name error.
+Copied the completed project, removed novalidate, added three HTML required attributes as instructed.
+Frontend copy: empty -> native first-field valueMissing bubble/focus; valid -> backend success.
+Manual frontend Razor edits match Week06-frontend-demo.zip. All 8 checkpoint source files match their ZIP contents.
+Simple guide renders all 7 sections with working section navigation, no desktop horizontal overflow.
+Expanded full Razor code contains both maxlength=200 attributes; copy button reports success (clipboard readback unavailable).
+No new mainline package inconsistency found; packages unchanged this walkthrough.
