@@ -17,3 +17,9 @@ npm run build
 在已安裝 .NET 10 SDK 的環境執行 `python3 tools/verify_walkthrough.py`。也可用 DOTNET 環境變數指定 dotnet 執行檔。腳本從乾淨的 `dotnet new webapp` 建立六個實作檢查點，每一步建置，測試兩週的真實 POST，再由這些檢查點重建 ZIP（包含學生 README.txt）。最後執行 `npm run build` 更新公開產物。
 
 `walkthrough-verification.txt` 記錄最近一次程式流程驗收。這不能代替學校 Windows Visual Studio 實機操作驗收。
+
+## 第六週逐步完整程式碼
+
+`python3 tools/build_week06_checkpoints.py` 產生第 00–07 步 JSON 與完整專案 ZIP，接著執行 `npm run build`。每步提供完整後端、完整 Razor 畫面與預期結果。第 02 步刻意沒有閘門，第 07 步為 15 字實驗版。
+
+驗證：`DOTNET=/path/to/dotnet python3 tools/verify_week06_checkpoints.py`。測試每個 ZIP 建置及合法、空白、錯誤 Email、長度邊界 POST。
