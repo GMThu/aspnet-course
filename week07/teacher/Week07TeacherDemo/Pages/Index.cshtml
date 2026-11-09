@@ -1,0 +1,72 @@
+@page
+@model Week07TeacherDemo.Pages.IndexModel
+@{
+    ViewData["Title"] = "活動報名";
+}
+
+<section class="hero">
+    <p class="eyebrow">WEEK 07 · EF CORE × SQL SERVER</p>
+    <h1>通過驗證，才值得留下來。</h1>
+    <p>合法資料保存到 SQL Server；最近報名由資料庫查回。</p>
+</section>
+
+<div class="page-grid">
+    <form method="post" novalidate class="card">
+        <h2>活動報名</h2>
+        <div asp-validation-summary="ModelOnly" class="validation" role="alert"></div>
+
+        <label asp-for="Input.DisplayName">顯示名稱</label>
+        <input asp-for="Input.DisplayName">
+        <span asp-validation-for="Input.DisplayName" class="validation"></span>
+
+        <label asp-for="Input.Email">Email</label>
+        <input asp-for="Input.Email">
+        <span asp-validation-for="Input.Email" class="validation"></span>
+
+        <label asp-for="Input.Session">參加場次</label>
+        <select asp-for="Input.Session">
+            <option value="">請選擇</option>
+            <option value="上午場">上午場</option>
+            <option value="下午場">下午場</option>
+        </select>
+        <span asp-validation-for="Input.Session" class="validation"></span>
+
+        <label asp-for="Input.Note">備註</label>
+        <textarea asp-for="Input.Note" rows="3"></textarea>
+        <span asp-validation-for="Input.Note" class="validation"></span>
+
+        <button type="submit">保存報名</button>
+    </form>
+
+    <section class="card" aria-labelledby="recent-title">
+        <h2 id="recent-title">最近報名</h2>
+        @if (!string.IsNullOrWhiteSpace(Model.SavedMessage))
+        {
+            <p class="saved" role="status">@Model.SavedMessage</p>
+        }
+
+        @if (Model.Registrations.Count == 0)
+        {
+            <p class="muted">目前還沒有報名資料。</p>
+        }
+        else
+        {
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>編號</th><th>顯示名稱</th><th>場次</th><th>建立時間（UTC）</th></tr></thead>
+                    <tbody>
+                    @foreach (var item in Model.Registrations)
+                    {
+                        <tr><td>@item.Id</td><td>@item.DisplayName</td><td>@item.Session</td><td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td></tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </section>
+</div>
+
+<section class="evidence">
+    <h2>本週驗收證據</h2>
+    <ol><li>錯誤資料不新增。</li><li>合法資料只新增一筆。</li><li>SSMS 與畫面一致。</li><li>停止再啟動仍能查到。</li><li>重新整理不重送 POST。</li></ol>
+</section>

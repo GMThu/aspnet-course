@@ -1,0 +1,40 @@
+第 1 步｜安裝同版本套件（Visual Studio 套件管理主控台）
+
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 10.0.14
+Install-Package Microsoft.EntityFrameworkCore.Tools -Version 10.0.14
+Install-Package Microsoft.EntityFrameworkCore.Design -Version 10.0.14
+Install-Package System.Security.Cryptography.Pkcs -Version 10.0.14
+
+`System.Security.Cryptography.Pkcs` 明確鎖在已修補的 10.0.14，避免 SQL Server provider 的相依解析落到有已知弱點的舊版。
+
+第 2 步｜Program.cs 頂端加入
+
+using Microsoft.EntityFrameworkCore;
+using Week07Registration.Data;
+
+第 3 步｜Program.cs 在 AddRazorPages() 後加入
+
+builder.Services.AddDbContext<CampusActivityContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("CampusActivity")));
+
+第 4 步｜appsettings.json 加入（與 Logging 同一層）
+
+"ConnectionStrings": {
+  "CampusActivity": "Server=.\\SQLEXPRESS;Database=CampusActivityDb;Trusted_Connection=True;TrustServerCertificate=True"
+}
+
+注意：
+- 若專案名稱不是 Week07Registration，請調整 using。
+- 若 SQL Server 執行個體不是 SQLEXPRESS，請依自己的 SSMS 連線名稱調整。
+- 不要把 SQL 帳號密碼提交到 Git。
+
+第 5 步｜建立並套用 Migration
+
+Add-Migration CreateRegistrations
+Update-Database
+
+終端機備援：
+
+dotnet ef migrations add CreateRegistrations
+dotnet ef database update

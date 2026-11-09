@@ -1,0 +1,45 @@
+@* 放在表單結束標籤之後。 *@
+
+@if (!string.IsNullOrWhiteSpace(Model.SavedMessage))
+{
+    <div class="alert alert-success" role="status">
+        @Model.SavedMessage
+    </div>
+}
+
+<section class="mt-4" aria-labelledby="registration-list-title">
+    <h2 id="registration-list-title">最近報名</h2>
+
+    @if (Model.Registrations.Count == 0)
+    {
+        <p>目前還沒有報名資料。</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>編號</th>
+                        <th>顯示名稱</th>
+                        <th>場次</th>
+                        <th>建立時間（UTC）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Registrations)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.DisplayName</td>
+                        <td>@item.Session</td>
+                        <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+@* 課堂列表刻意不顯示 Email 與 Note，避免投影時暴露輸入內容。 *@
