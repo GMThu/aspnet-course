@@ -4,6 +4,7 @@ import json, zipfile
 ROOT=Path(__file__).resolve().parents[1]
 c5=json.loads((ROOT/'src/code.json').read_text());c6=json.loads((ROOT/'src/week06/code.json').read_text())
 c5={k:v.replace('Week05Registration','Week06Validation') for k,v in c5.items()}
+c5['final']=c5['final'].replace('第五週｜校園活動報名','第六週起跑｜校園活動報名').replace('<form method="post">','<form method="post" novalidate>').replace('資料尚未驗證，也尚未寫入資料庫。','本起跑畫面尚未完成驗證教學，也尚未寫入資料庫。')
 rules=c6['handler'].replace('        if (!ModelState.IsValid)\n        {\n            return;\n        }\n','')
 changes=['不修改：確認第五週起跑專案。','不修改：指出 Input 與四個屬性。','只改 Index.cshtml.cs：加入 DataAnnotations 規則；暫時沒有閘門。','只改 Index.cshtml.cs：在 Submitted = true 之前加 ModelState 閘門。','只改 Index.cshtml：加入錯誤位置與 novalidate。','不修改：沿用第 04 步，執行三路測試。','不修改：沿用第 04 步，測 20／21 與 100／101 字。','只改 Index.cshtml.cs：名稱上限與訊息暫改 15 字；測完恢復 20。']
 expected=['合法資料可送出，摘要顯示「報名資料已收到」。尚未加入本週驗證。','Build 成功，行為與第 00 步相同；兩個類別位於同一檔案。','Build 成功，但 OnPost 仍直接設定成功旗標；即使後端已有驗證錯誤，也還可能顯示成功。這是刻意保留的中間步驟，不可當成完成版。','Build 成功。合法資料仍顯示第五週摘要；不合法資料不顯示摘要，但尚未加入欄位錯誤訊息。','空白送出顯示三個必填錯誤；Email=abc 顯示格式錯誤；合法資料顯示「報名資料驗證通過」。','按本頁測試表逐列測試；合法後再送 abc，成功摘要必須消失。','其他欄位合法：名稱 20 字通過、21 字拒絕；備註空白可通過，100 字通過、101 字拒絕。','15 字母通過、16 字母拒絕，訊息是「顯示名稱最多 15 字」。此版本供實驗；測完恢復第 06 步。']

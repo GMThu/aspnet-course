@@ -66,6 +66,8 @@ with tempfile.TemporaryDirectory(prefix='walkthrough-',dir=ROOT) as td:
    try: source.write_text(source.read_text().replace('Week05Registration','Week06Validation'))
    except UnicodeDecodeError: pass
  (p/'Week05Registration.csproj').rename(p/'Week06Validation.csproj')
+ form=p/'Pages/Index.cshtml'
+ form.write_text(form.read_text().replace('第五週｜校園活動報名','第六週起跑｜校園活動報名').replace('<form method="post">','<form method="post" novalidate>').replace('資料尚未驗證，也尚未寫入資料庫。','本起跑畫面尚未完成驗證教學，也尚未寫入資料庫。'))
  (p/'Pages/Index.cshtml.cs').write_text(C6['handler']);build(p,'Week06 step03 validation backend before error UI')
  (p/'Pages/Index.cshtml').write_text(C6['form']);build(p,'Week06 step04 error UI');post_tests(p,6,5216)
  archive(p,'Week06-complete.zip','第六週第 05 步三路測試，再做第 06 步長度邊界。本包已包含驗證與錯誤訊息。')

@@ -1,9 +1,9 @@
-Step 00: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 01: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 02: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 03: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 04: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 05: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 06: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
-Step 07: build + valid/bad-email/blank/boundary-pass/boundary-fail POST PASS
+Step 00: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 01: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 02: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 03: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 04: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 05: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 06: sequential edits + build + CSS + 9 chained POST cases PASS
+Step 07: sequential edits + build + CSS + 9 chained POST cases PASS
 Tested on macOS arm64 / .NET 10; Windows Visual Studio UI not executed.

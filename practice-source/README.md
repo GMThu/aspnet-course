@@ -25,3 +25,9 @@ npm run build
 驗證：`DOTNET=/path/to/dotnet python3 tools/verify_week06_checkpoints.py`。測試每個 ZIP 建置及合法、空白、錯誤 Email、長度邊界 POST。
 
 第六週獨立起跑包：`Week06-starter.zip`，專案檔與 namespace 統一為 `Week06Validation`。第 00–07 步與完成包使用同一名稱；第五週原始下載包維持原名。已有舊版第六週資料者，請下載新包到獨立資料夾再依本版完整程式碼練習。
+
+## 學生流程複查
+
+從公開 Week06-starter.zip 起跑，核對第 00–07 步。修正：起跑畫面使用第六週標題；起跑 form 預先加入 novalidate，避免第 02 步 Email 標註觸發瀏覽器攔截；HTTP 指令改用 --launch-profile http，以保留開發環境與靜態資源設定。
+
+verify_week06_checkpoints.py 現在在同一份起跑專案依序只修改講義指定檔案，檢查八步建置、CSS HTTP 回應與 72 次連續 POST，涵蓋空白、Email、名稱邊界、備註 100/101 字，以及成功後再次失敗。另以瀏覽器核對起跑、第 02/03 步、欄位錯誤、修正成功與邊界畫面。驗證環境為 macOS/.NET 10，未執行 Windows Visual Studio 介面。
