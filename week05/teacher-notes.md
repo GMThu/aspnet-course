@@ -44,3 +44,8 @@
 
 ## 逐行解說
 第 11–13 頁逐行讀 HTML，第 16–19 頁讀 Razor 與 C#，第 21 頁讀摘要。完整檔案逐行解說位於學生圖文版第 04、05、06 步。RegistrationInput 與 IndexModel 同層，完整講義放在 IndexModel 結束後。GET 只顯示表單時保留 [BindProperty] 供 POST 使用；GET 自動接網址參數到屬性才用 SupportsGet = true。小寫 get/set 是屬性讀寫，不是 HTTP 方法。
+
+
+## 實作簡易版
+
+[第五週實作簡易版](../practice/week05/simple/)只保留工具準備、建立專案、表單、C# 收值、Razor 摘要、兩組驗收及獨立實作。完整程式直接共用詳解版來源；CSS 為保留原檔並追加的完整內容。沒有排錯區或延伸補充，課堂可由簡報實作頁直接開啟。

@@ -10,6 +10,7 @@ const output=path.resolve(root,'../practice');
 const base='/aspnet-course/practice/';
 await mkdir(path.join(output,'assets'),{recursive:true});
 await mkdir(path.join(output,'week06/simple'),{recursive:true});
+await mkdir(path.join(output,'week05/simple'),{recursive:true});
 await build({entryPoints:[path.join(root,'src/entry.tsx')],bundle:true,minify:true,jsx:'automatic',format:'esm',target:['es2020'],outfile:path.join(output,'assets/app.js'),legalComments:'linked',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'github-pages-base',setup(b){b.onLoad({filter:/\.tsx$/},async args=>({contents:(await readFile(args.path,'utf8')).replace(/href="\//g,`href="${base}`),loader:'tsx'}))}}]});
 const css=(await readFile(path.join(root,'src/style.css'),'utf8')).replace('@import "tailwindcss";','');
 await writeFile(path.join(output,'assets/style.css'),css);
@@ -19,4 +20,5 @@ const html=`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><met
 await writeFile(path.join(output,'index.html'),html);
 await writeFile(path.join(output,'week06/index.html'),html);
 await writeFile(path.join(output,'week06/simple/index.html'),html.replace('第五、六週圖文實作手冊｜東海 ASP.NET','第六週實作簡易版｜東海 ASP.NET'));
+await writeFile(path.join(output,'week05/simple/index.html'),html.replace('第五、六週圖文實作手冊｜東海 ASP.NET','第五週實作簡易版｜東海 ASP.NET'));
 console.log('Built practice/ and practice/week06/ for GitHub Pages');
