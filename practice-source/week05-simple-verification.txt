@@ -1,0 +1,12 @@
+2026-11-09 Week05 simple guide walkthrough
+Environment: macOS, .NET 10, in-app browser; HTTP development launch profile.
+Created a fresh project with dotnet new webapp --name Week05Registration --framework net10.0 --auth None (not the completed ZIP).
+Step 2: fresh template built and displayed Welcome.
+Step 3: replaced Index.cshtml with canonical form; appended canonical CSS once to generated site.css. Build passed. Four fields/button rendered, hero rgb(18,61,84), no summary.
+Step 4: replaced Index.cshtml.cs with canonical handler. Build passed; original form still displayed with no summary.
+Step 5: replaced Index.cshtml with canonical final. Build passed; initial GET had no summary.
+Step 6 browser POST A: 小安 / student-a@example.com / 週三晚上 / empty note -> exact summary, note 無.
+Step 6 browser POST B in same form: 小晴 / student-b@example.com / 週六下午 / 會帶相機 -> all four summary values updated correctly.
+Home GET after second POST: summary absent.
+Clarified only essential directions: exact project name; nested code-behind location; focus editor before select-all/paste/save; explicit step4 build/run; defer submit acceptance to steps5-6; replace prior field values and look below form.
+Windows Visual Studio creation dialogs and HTTPS certificate setup were not executed on this Mac. Step7 independent exercise was not part of this requested two-input acceptance scope.
