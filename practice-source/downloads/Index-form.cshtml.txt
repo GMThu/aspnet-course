@@ -1,7 +1,6 @@
 @page
 @model IndexModel
 @{ ViewData["Title"] = "校園活動報名"; }
-@* 保留自己檔案頂端既有的 @page、@model 與 @{ ... }。只替換首頁內容區。 *@
 
 <section class="activity-hero mb-4">
     <p class="text-uppercase fw-bold mb-2">校園活動報名</p>
@@ -41,5 +40,3 @@
         </form>
     </div>
 </section>
-
-@* 第二節停點：這份內容不引用尚未建立的 Input 屬性，因此專案仍須能編譯。 *@

@@ -1,0 +1,20 @@
+01 clean template: build PASS
+04 form and CSS: build PASS
+05 backend with plain HTML form: build PASS
+06 bound form and summary: build PASS
+Week5 A: POST PASS
+Week5 B: POST PASS
+Week06 step03 validation backend before error UI: build PASS
+Week06 step04 error UI: build PASS
+Week6 A: POST PASS
+Week6 B: POST PASS
+Week6 blank: POST PASS
+Week6 bad-email: POST PASS
+Week6 missing-session: POST PASS
+Week6 name-20: POST PASS
+Week6 name-21: POST PASS
+Week6 note-100: POST PASS
+Week6 note-101: POST PASS
+Week6 corrected: POST PASS
+
+Platform: macOS Arm64 / .NET 10. Windows Visual Studio UI not executed.

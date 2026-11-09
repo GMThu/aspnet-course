@@ -1,4 +1,5 @@
 import {build} from 'esbuild';
+import {createHash} from 'node:crypto';
 import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -11,7 +12,8 @@ await build({entryPoints:[path.join(root,'src/entry.tsx')],bundle:true,minify:tr
 const css=(await readFile(path.join(root,'src/style.css'),'utf8')).replace('@import "tailwindcss";','');
 await writeFile(path.join(output,'assets/style.css'),css);
 await cp(path.join(root,'downloads'),path.join(output,'downloads'),{recursive:true});
-const html=`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第五、六週圖文實作手冊｜東海 ASP.NET</title><meta name="description" content="Windows 學生自主練習：從 Razor Pages 報名表到資料驗證，含完整步驟、程式碼、下載包與排錯。"><link rel="icon" href="data:,"><link rel="stylesheet" href="${base}assets/style.css"></head><body><div id="root"></div><noscript>請啟用 JavaScript 使用分步實作手冊，或回到<a href="/aspnet-course/">課程總覽</a>閱讀原始簡報。</noscript><script type="module" src="${base}assets/app.js"></script></body></html>`;
+const version=createHash('sha256').update(await readFile(path.join(output,'assets/app.js'))).update(css).digest('hex').slice(0,12);
+const html=`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第五、六週圖文實作手冊｜東海 ASP.NET</title><meta name="description" content="Windows 學生自主練習：從 Razor Pages 報名表到資料驗證，含完整步驟、程式碼、下載包與排錯。"><link rel="icon" href="data:,"><link rel="stylesheet" href="${base}assets/style.css?v=${version}"></head><body><div id="root"></div><noscript>請啟用 JavaScript 使用分步實作手冊，或回到<a href="/aspnet-course/">課程總覽</a>閱讀原始簡報。</noscript><script type="module" src="${base}assets/app.js?v=${version}"></script></body></html>`;
 await writeFile(path.join(output,'index.html'),html);
 await writeFile(path.join(output,'week06/index.html'),html);
 console.log('Built practice/ and practice/week06/ for GitHub Pages');

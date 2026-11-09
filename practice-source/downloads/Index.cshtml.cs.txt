@@ -6,8 +6,6 @@ namespace Week05Registration.Pages;
 public class IndexModel : PageModel
 {
     public void OnGet() {}
-    // 將以下成員放進既有的 IndexModel 類別內。
-    // 檔案頂端需要：using Microsoft.AspNetCore.Mvc;
     
     [BindProperty]
     public RegistrationInput Input { get; set; } = new();
@@ -18,12 +16,13 @@ public class IndexModel : PageModel
     {
         Submitted = true;
     }
-    
-    public class RegistrationInput
-    {
-        public string DisplayName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Session { get; set; } = string.Empty;
-        public string? Note { get; set; }
-    }
+}
+
+// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。
+public class RegistrationInput
+{
+    public string DisplayName { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Session { get; set; } = string.Empty;
+    public string? Note { get; set; }
 }

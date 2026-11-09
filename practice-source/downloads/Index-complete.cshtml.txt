@@ -1,7 +1,6 @@
 @page
 @model IndexModel
 @{ ViewData["Title"] = "第五週｜校園活動報名"; }
-@* 保留自己檔案頂端既有的 @page、@model 與 @{ ... }。只替換首頁內容區。 *@
 
 <section class="activity-hero mb-4">
     <p class="text-uppercase fw-bold mb-2">校園活動報名</p>
@@ -42,10 +41,6 @@
     </div>
 </section>
 
-@* 第二節停點：這份內容不引用尚未建立的 Input 屬性，因此專案仍須能編譯。 *@
-
-@* 第三節：建立 Input 與 OnPost 後，放在表單區塊旁或下方。 *@
-
 @if (Model.Submitted)
 {
     <section class="alert alert-success registration-result" role="status">
@@ -63,8 +58,3 @@
         <p class="mb-0"><strong>本週限制：</strong>資料尚未驗證，也尚未寫入資料庫。</p>
     </section>
 }
-
-@* 同一輪再把純 HTML 欄位改成 asp-for，例如：
-<label asp-for="Input.DisplayName" class="form-label">顯示名稱</label>
-<input asp-for="Input.DisplayName" class="form-control">
-*@

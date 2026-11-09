@@ -4,3 +4,5 @@
 ol{list-style:decimal}ul{list-style:disc}main{overflow-anchor:none}
 
 .week-switch{display:flex;border:1px solid #cbd6bf;border-radius:6px;margin-bottom:22px;overflow:hidden}.week-switch a{flex:1;text-align:center;padding:7px;font-size:12px}.week-switch a[aria-current=page]{background:#205e46;color:white}.validation-flow{padding:24px;text-align:center}.validation-flow>div:first-child{background:#edf2e7;padding:15px;border-radius:7px}.validation-flow p{font-size:13px}.validation-flow>strong{display:block;margin:23px;font:600 16px monospace}.branches{display:grid;grid-template-columns:1fr 1fr;gap:20px}.branches>div{padding:20px;border-radius:7px}.invalid{background:#f8e9df;color:#965437}.valid{background:#e6efd5;color:#456c35}@media(max-width:700px){.branches{grid-template-columns:1fr}.week-switch{max-width:250px;margin-bottom:12px}}
+
+.beginner-help{background:#f0f4e9;padding:18px 22px;border:1px solid #d5dfcb;border-radius:8px;margin:22px 0}.beginner-help summary{color:#285c40}.terminal-example{padding:18px;background:#172a30;color:#dce8de;border-radius:6px;overflow:auto;font-size:12px}
