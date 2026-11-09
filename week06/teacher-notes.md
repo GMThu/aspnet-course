@@ -78,3 +78,23 @@
 | 28 | Boss 起跑｜先備份再製造問題 |
 | 29 | 情境式最終 Boss |
 | 30 | 第六週完成 |
+
+
+## 初學者補強：為什麼與少了會怎樣
+
+- 第10頁／學生01：先走小安按送出 → BindProperty 填入 Input.DisplayName → OnPost 讀到小安。RegistrationInput 定義欄位、Input 是屬性、new() 建立本次物件。GET 只開表單，標註保留等 POST；get/set 是 C# 語法，SupportsGet 留作延伸。
+- 第14頁／學生02：Required 明訂必填與中文提示。此案非 nullable string 有隱含必填，不能說刪 Required 空白就過；只刪名稱標註仍會失敗，失去自訂中文提示。
+- 第16頁／學生03：abc → IsValid=false → !false=true → return → Submitted 保持 false；合法資料才設定 true。IsValid 讀結果，不是開始驗證。
+- 第18頁／學生04：asp-validation-for 顯示對應欄位錯誤，text-danger 只管樣式。少 span 不會停用驗證，ModelOnly 不補列欄位錯誤。
+
+完成04後才做選做副本實驗。停止、複製整個專案到另一資料夾；每次只改一項、儲存、Build、重啟、回 Home，完成即還原。固定場次週三晚上、備註空白：
+
+| 修改 | 名稱／Email | 預期畫面 |
+| --- | --- | --- |
+| 只刪名稱 Required | 空白／student-a@example.com | 無摘要，名稱預設訊息（本測試為 The DisplayName field is required.） |
+| 只刪整個 if／return 區塊，保留 Submitted=true | 小安／abc | Email 紅字與成功摘要同時出現 |
+| 只刪 Email span | 小安／abc | 無摘要，也無 Email 提示 |
+
+還原後，合法資料成功、abc 失敗都要重測。第02步只有規則、第03步還沒有提示，不要提前要求第04步畫面。
+
+依據：[Microsoft 模型驗證與隱含必填](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-10.0)。

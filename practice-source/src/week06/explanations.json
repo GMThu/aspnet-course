@@ -50,12 +50,12 @@
         {
           "line": 10,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 11,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 12,
@@ -496,12 +496,12 @@
         {
           "line": 10,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 11,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 12,
@@ -937,12 +937,12 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 11,
@@ -1007,7 +1007,7 @@
         {
           "line": 23,
           "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 24,
@@ -1027,7 +1027,7 @@
         {
           "line": 27,
           "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 28,
@@ -1047,7 +1047,7 @@
         {
           "line": 31,
           "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 32,
@@ -1423,12 +1423,12 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 11,
@@ -1458,7 +1458,7 @@
         {
           "line": 16,
           "code": "        if (!ModelState.IsValid)",
-          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。這行只讀取先前繫結與驗證的結果，不是開始驗證的指令。少了這個 if 與 return，即使有錯誤也會往下設定成功旗標。"
         },
         {
           "line": 17,
@@ -1513,7 +1513,7 @@
         {
           "line": 27,
           "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 28,
@@ -1533,7 +1533,7 @@
         {
           "line": 31,
           "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 32,
@@ -1553,7 +1553,7 @@
         {
           "line": 35,
           "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 36,
@@ -1929,12 +1929,12 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 11,
@@ -1964,7 +1964,7 @@
         {
           "line": 16,
           "code": "        if (!ModelState.IsValid)",
-          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。這行只讀取先前繫結與驗證的結果，不是開始驗證的指令。少了這個 if 與 return，即使有錯誤也會往下設定成功旗標。"
         },
         {
           "line": 17,
@@ -2019,7 +2019,7 @@
         {
           "line": 27,
           "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 28,
@@ -2039,7 +2039,7 @@
         {
           "line": 31,
           "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 32,
@@ -2059,7 +2059,7 @@
         {
           "line": 35,
           "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 36,
@@ -2181,7 +2181,7 @@
         {
           "line": 19,
           "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 20,
@@ -2211,7 +2211,7 @@
         {
           "line": 25,
           "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 26,
@@ -2261,7 +2261,7 @@
         {
           "line": 35,
           "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 36,
@@ -2291,7 +2291,7 @@
         {
           "line": 41,
           "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 42,
@@ -2460,12 +2460,12 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 11,
@@ -2495,7 +2495,7 @@
         {
           "line": 16,
           "code": "        if (!ModelState.IsValid)",
-          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。這行只讀取先前繫結與驗證的結果，不是開始驗證的指令。少了這個 if 與 return，即使有錯誤也會往下設定成功旗標。"
         },
         {
           "line": 17,
@@ -2550,7 +2550,7 @@
         {
           "line": 27,
           "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 28,
@@ -2570,7 +2570,7 @@
         {
           "line": 31,
           "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 32,
@@ -2590,7 +2590,7 @@
         {
           "line": 35,
           "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 36,
@@ -2712,7 +2712,7 @@
         {
           "line": 19,
           "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 20,
@@ -2742,7 +2742,7 @@
         {
           "line": 25,
           "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 26,
@@ -2792,7 +2792,7 @@
         {
           "line": 35,
           "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 36,
@@ -2822,7 +2822,7 @@
         {
           "line": 41,
           "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 42,
@@ -2991,12 +2991,12 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 11,
@@ -3026,7 +3026,7 @@
         {
           "line": 16,
           "code": "        if (!ModelState.IsValid)",
-          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。這行只讀取先前繫結與驗證的結果，不是開始驗證的指令。少了這個 if 與 return，即使有錯誤也會往下設定成功旗標。"
         },
         {
           "line": 17,
@@ -3081,7 +3081,7 @@
         {
           "line": 27,
           "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 28,
@@ -3101,7 +3101,7 @@
         {
           "line": 31,
           "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 32,
@@ -3121,7 +3121,7 @@
         {
           "line": 35,
           "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 36,
@@ -3243,7 +3243,7 @@
         {
           "line": 19,
           "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 20,
@@ -3273,7 +3273,7 @@
         {
           "line": 25,
           "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 26,
@@ -3323,7 +3323,7 @@
         {
           "line": 35,
           "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 36,
@@ -3353,7 +3353,7 @@
         {
           "line": 41,
           "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 42,
@@ -3522,12 +3522,12 @@
         {
           "line": 9,
           "code": "    [BindProperty]",
-          "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+          "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
         },
         {
           "line": 10,
           "code": "    public RegistrationInput Input { get; set; } = new();",
-          "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+          "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
         },
         {
           "line": 11,
@@ -3557,7 +3557,7 @@
         {
           "line": 16,
           "code": "        if (!ModelState.IsValid)",
-          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。這行只讀取先前繫結與驗證的結果，不是開始驗證的指令。少了這個 if 與 return，即使有錯誤也會往下設定成功旗標。"
         },
         {
           "line": 17,
@@ -3612,7 +3612,7 @@
         {
           "line": 27,
           "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 28,
@@ -3632,7 +3632,7 @@
         {
           "line": 31,
           "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 32,
@@ -3652,7 +3652,7 @@
         {
           "line": 35,
           "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
-          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。"
         },
         {
           "line": 36,
@@ -3774,7 +3774,7 @@
         {
           "line": 19,
           "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 20,
@@ -3804,7 +3804,7 @@
         {
           "line": 25,
           "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 26,
@@ -3854,7 +3854,7 @@
         {
           "line": 35,
           "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 36,
@@ -3884,7 +3884,7 @@
         {
           "line": 41,
           "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
-          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。"
         },
         {
           "line": 42,
@@ -4050,12 +4050,12 @@
     {
       "line": 1,
       "code": "[BindProperty]",
-      "why": "指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。"
+      "why": "告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。"
     },
     {
       "line": 2,
       "code": "public RegistrationInput Input { get; set; } = new();",
-      "why": "RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。"
+      "why": "建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。"
     }
   ]
 }

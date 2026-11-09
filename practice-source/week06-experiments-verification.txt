@@ -1,0 +1,7 @@
+baseline-blank: build + POST + visible errors + summary + retained Email PASS
+baseline-email: build + POST + visible errors + summary + retained Email PASS
+corrected: build + POST + visible errors + summary + retained Email PASS
+no-required: build + POST + visible errors + summary + retained Email PASS
+no-gate: build + POST + visible errors + summary + retained Email PASS
+no-span: build + POST + visible errors + summary + retained Email PASS
+macOS arm64 / .NET 10; Windows Visual Studio UI not executed.

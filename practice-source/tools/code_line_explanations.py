@@ -16,13 +16,13 @@ def explain(source,kind,week=6):
     'using System.ComponentModel.DataAnnotations;':'引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。',
     f'namespace {"Week05Registration" if week==5 else "Week06Validation"}.Pages;':'將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。',
     'public class IndexModel : PageModel':'宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。',
-    '[BindProperty]':'指定下方 Input 是要接收請求資料的屬性；例如表單送來 Input.DisplayName=小安，框架在 OnPost 執行前把值填入 Input.DisplayName，省去自己逐欄讀取 Request.Form。標註只套用緊接著的 Input，不會套用 Submitted。GET 只顯示表單時仍保留此標註；GET 要自動接網址值到屬性才使用 SupportsGet = true。',
-    'public RegistrationInput Input { get; set; } = new();':'RegistrationInput 是型別，Input 是屬性名稱。每次建立這個頁面模型時，new() 先建立空的報名物件，避免 Input 為 null 而無法直接讀取欄位；它不是資料保存。get 讓 Razor／程式讀取物件，set 允許設定物件；與 HTTP GET／POST 不同。POST 繫結再把使用者的值填入這次物件。',
+    '[BindProperty]':'告訴 ASP.NET：「POST 送來的表單，請填進下一行的 Input。」例如送來 Input.DisplayName=小安，OnPost 開始時就能讀到小安。若本例刪掉它又沒有其他接收程式，Input 不會因此自動拿到表單。初次 GET 只是顯示頁面，仍保留這行等 POST 使用。',
+    'public RegistrationInput Input { get; set; } = new();':'建立頁面可使用的 Input 屬性，型別是 RegistrationInput。new() 先建立一份空物件，才能讀取裡面的欄位；POST 時再填入學生的資料。public 讓框架可存取，get 允許讀取、set 允許設定，與 HTTP GET／POST 無關。這不是保存資料，每次請求重新建立。',
     'public bool Submitted { get; set; }':'給 Razor 判斷是否顯示摘要的屬性。bool 預設 false，剛開頁面就不會誤顯示「已收到」；get 供畫面讀取，set 供 OnPost 設定。Submitted 是我們自訂的名字，不是框架自動改成 true 的功能。每次請求有新的頁面模型，這個旗標不會保存上次狀態。',
     'public void OnGet() { }':'瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。',
     'public void OnGet() {}':'瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。',
     'public void OnPost()':'表單用 method="post" 送出時，Razor Pages 依命名慣例呼叫這個 public 方法；欄位繫結會先完成。void 表示不回傳值，方法結束後仍會呈現此頁。把設定旗標放在這裡，是為了只在收到 POST 時顯示摘要，而不是初次 GET 就顯示。',
-    'if (!ModelState.IsValid)':'! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。',
+    'if (!ModelState.IsValid)':'! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。這行只讀取先前繫結與驗證的結果，不是開始驗證的指令。少了這個 if 與 return，即使有錯誤也會往下設定成功旗標。',
     'return;':'提早離開這次 OnPost，避免繼續設定成功旗標。此方法是 void，因此寫 return;，不是 return Page();。',
     'Submitted = true;':'將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。',
     'public class RegistrationInput':'宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。',
@@ -35,7 +35,7 @@ def explain(source,kind,week=6):
     f=m[1];why=f'{f} 承接「{fields[f]}」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。'
     if f=='Email':why+=' 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。'
     if f=='Session':why+=' 選單送來的是 option 的 value，本週用文字而非數字。'
-   if t.startswith('[Required('):why='要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。'
+   if t.startswith('[Required('):why='要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。明寫規則是為了表達必填意圖並指定易懂訊息。本專案的非 nullable string 另有隱含必填，刪掉此標註不代表空白能通過；但會失去自訂中文訊息。'
    if t.startswith('[EmailAddress('):why='檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。'
    if t.startswith('[StringLength('):
     limit=re.search(r'StringLength\((\d+)',t)[1];why=f'限制下方字串最多 {limit} 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。'
@@ -61,7 +61,7 @@ def explain(source,kind,week=6):
    elif t.startswith('<input '):
     f=re.search(r'Input\.(\w+)',t)[1];why=f'單行輸入框。asp-for="Input.{f}" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。'
    elif t.startswith('<span '):
-    f=re.search(r'Input\.(\w+)',t)[1];why=f'顯示 Input.{f} 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。'
+    f=re.search(r'Input\.(\w+)',t)[1];why=f'顯示 Input.{f} 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。少了這個 span，後端仍會擋下錯誤，但學生在此處看不到原因；它不負責啟動驗證。'
    elif t.startswith('<select '):why='建立場次選單。asp-for="Input.Session" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。'
    elif t.startswith('<option '):
     value=re.search(r'value="(.*?)"',t)[1];why='預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。' if not value else f'顯示並送出「{value}」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。'
