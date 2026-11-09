@@ -1,0 +1,4061 @@
+{
+  "steps": [
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 4,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 5,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 6,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 7,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 8,
+          "code": "    public void OnGet() {}",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 9,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 10,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 11,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 12,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 13,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 14,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 15,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 16,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 17,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 18,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 19,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 21,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 22,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 23,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 24,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 25,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 26,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 27,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 28,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週起跑｜校園活動報名\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">填寫表單，觀察資料如何抵達後端，再回到畫面。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 16,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 17,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 18,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 19,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 20,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 21,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 22,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 23,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 24,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 25,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 26,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 27,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 28,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 29,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 30,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 31,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 32,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 33,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 34,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 35,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 36,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 37,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 38,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 39,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 40,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 41,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 42,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 45,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 46,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 47,
+          "code": "        <h2 class=\"h4\">報名資料已收到</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 48,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 49,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 50,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 51,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 52,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 53,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 54,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 55,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 56,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 57,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 58,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>本起跑畫面尚未完成驗證教學，也尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 59,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 60,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 4,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 5,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 6,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 7,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 8,
+          "code": "    public void OnGet() {}",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 9,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 10,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 11,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 12,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 13,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 14,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 15,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 16,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 17,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 18,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 19,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 21,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 22,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 23,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 24,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 25,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 26,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 27,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 28,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週起跑｜校園活動報名\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">填寫表單，觀察資料如何抵達後端，再回到畫面。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 16,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 17,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 18,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 19,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 20,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 21,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 22,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 23,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 24,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 25,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 26,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 27,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 28,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 29,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 30,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 31,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 32,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 33,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 34,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 35,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 36,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 37,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 38,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 39,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 40,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 41,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 42,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 45,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 46,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 47,
+          "code": "        <h2 class=\"h4\">報名資料已收到</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 48,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 49,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 50,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 51,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 52,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 53,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 54,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 55,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 56,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 57,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 58,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>本起跑畫面尚未完成驗證教學，也尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 59,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 60,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "using System.ComponentModel.DataAnnotations;",
+          "why": "引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 6,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 7,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 8,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 9,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 10,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 11,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 12,
+          "code": "    public void OnGet() { }",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 13,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 14,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 15,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 16,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 17,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 18,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 19,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 20,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 21,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 22,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 23,
+          "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 24,
+          "code": "    [StringLength(20, ErrorMessage = \"顯示名稱最多 20 字\")]",
+          "why": "限制下方字串最多 20 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 25,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 26,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 27,
+          "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 28,
+          "code": "    [EmailAddress(ErrorMessage = \"Email 格式不正確\")]",
+          "why": "檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。"
+        },
+        {
+          "line": 29,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 30,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 31,
+          "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 32,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 33,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 34,
+          "code": "    [StringLength(100, ErrorMessage = \"備註最多 100 字\")]",
+          "why": "限制下方字串最多 100 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 35,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 36,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週起跑｜校園活動報名\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">填寫表單，觀察資料如何抵達後端，再回到畫面。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 16,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 17,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 18,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 19,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 20,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 21,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 22,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 23,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 24,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 25,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 26,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 27,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 28,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 29,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 30,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 31,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 32,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 33,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 34,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 35,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 36,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 37,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 38,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 39,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 40,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 41,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 42,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 45,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 46,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 47,
+          "code": "        <h2 class=\"h4\">報名資料已收到</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 48,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 49,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 50,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 51,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 52,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 53,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 54,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 55,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 56,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 57,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 58,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>本起跑畫面尚未完成驗證教學，也尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 59,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 60,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "using System.ComponentModel.DataAnnotations;",
+          "why": "引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 6,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 7,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 8,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 9,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 10,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 11,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 12,
+          "code": "    public void OnGet() { }",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 13,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 14,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 15,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 16,
+          "code": "        if (!ModelState.IsValid)",
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+        },
+        {
+          "line": 17,
+          "code": "        {",
+          "why": "開始 if (!ModelState.IsValid) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 18,
+          "code": "            return;",
+          "why": "提早離開這次 OnPost，避免繼續設定成功旗標。此方法是 void，因此寫 return;，不是 return Page();。"
+        },
+        {
+          "line": 19,
+          "code": "        }",
+          "why": "結束 if (!ModelState.IsValid) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 21,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 22,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 23,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 24,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 25,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 26,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 27,
+          "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 28,
+          "code": "    [StringLength(20, ErrorMessage = \"顯示名稱最多 20 字\")]",
+          "why": "限制下方字串最多 20 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 29,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 30,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 31,
+          "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 32,
+          "code": "    [EmailAddress(ErrorMessage = \"Email 格式不正確\")]",
+          "why": "檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。"
+        },
+        {
+          "line": 33,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 34,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 35,
+          "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 36,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "    [StringLength(100, ErrorMessage = \"備註最多 100 字\")]",
+          "why": "限制下方字串最多 100 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 39,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 40,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週起跑｜校園活動報名\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">填寫表單，觀察資料如何抵達後端，再回到畫面。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 16,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 17,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 18,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 19,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 20,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 21,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 22,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 23,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 24,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 25,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 26,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 27,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 28,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 29,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 30,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 31,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 32,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 33,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 34,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 35,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 36,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 37,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 38,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 39,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 40,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 41,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 42,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 45,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 46,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 47,
+          "code": "        <h2 class=\"h4\">報名資料已收到</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 48,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 49,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 50,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 51,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 52,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 53,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 54,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 55,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 56,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 57,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 58,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>本起跑畫面尚未完成驗證教學，也尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 59,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 60,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "using System.ComponentModel.DataAnnotations;",
+          "why": "引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 6,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 7,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 8,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 9,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 10,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 11,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 12,
+          "code": "    public void OnGet() { }",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 13,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 14,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 15,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 16,
+          "code": "        if (!ModelState.IsValid)",
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+        },
+        {
+          "line": 17,
+          "code": "        {",
+          "why": "開始 if (!ModelState.IsValid) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 18,
+          "code": "            return;",
+          "why": "提早離開這次 OnPost，避免繼續設定成功旗標。此方法是 void，因此寫 return;，不是 return Page();。"
+        },
+        {
+          "line": 19,
+          "code": "        }",
+          "why": "結束 if (!ModelState.IsValid) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 21,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 22,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 23,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 24,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 25,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 26,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 27,
+          "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 28,
+          "code": "    [StringLength(20, ErrorMessage = \"顯示名稱最多 20 字\")]",
+          "why": "限制下方字串最多 20 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 29,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 30,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 31,
+          "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 32,
+          "code": "    [EmailAddress(ErrorMessage = \"Email 格式不正確\")]",
+          "why": "檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。"
+        },
+        {
+          "line": 33,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 34,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 35,
+          "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 36,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "    [StringLength(100, ErrorMessage = \"備註最多 100 字\")]",
+          "why": "限制下方字串最多 100 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 39,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 40,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週｜收到不等於接受\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">先檢查必填、格式與長度，符合規則才顯示成功摘要。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div asp-validation-summary=\"ModelOnly\" class=\"text-danger\" role=\"alert\"></div>",
+          "why": "顯示模型層級錯誤。ModelOnly 不列出欄位錯誤，所以本週通常留白；欄位提示靠各自的 span。text-danger 設定紅字，role=\"alert\" 提供輔助科技語意。"
+        },
+        {
+          "line": 16,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 17,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 18,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 19,
+          "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 20,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 21,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 22,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 23,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 24,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 25,
+          "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 26,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 27,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 28,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 29,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 30,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 31,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 32,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 33,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 34,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 35,
+          "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 36,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 39,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 40,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 41,
+          "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 42,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 45,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 46,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 47,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 48,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 49,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 50,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 51,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 52,
+          "code": "        <h2 class=\"h4\">報名資料驗證通過</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 53,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 54,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 55,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 56,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 57,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 58,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 59,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 60,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 61,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 62,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 63,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>資料已通過本週規則，但尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 64,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 65,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "using System.ComponentModel.DataAnnotations;",
+          "why": "引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 6,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 7,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 8,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 9,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 10,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 11,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 12,
+          "code": "    public void OnGet() { }",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 13,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 14,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 15,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 16,
+          "code": "        if (!ModelState.IsValid)",
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+        },
+        {
+          "line": 17,
+          "code": "        {",
+          "why": "開始 if (!ModelState.IsValid) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 18,
+          "code": "            return;",
+          "why": "提早離開這次 OnPost，避免繼續設定成功旗標。此方法是 void，因此寫 return;，不是 return Page();。"
+        },
+        {
+          "line": 19,
+          "code": "        }",
+          "why": "結束 if (!ModelState.IsValid) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 21,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 22,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 23,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 24,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 25,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 26,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 27,
+          "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 28,
+          "code": "    [StringLength(20, ErrorMessage = \"顯示名稱最多 20 字\")]",
+          "why": "限制下方字串最多 20 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 29,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 30,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 31,
+          "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 32,
+          "code": "    [EmailAddress(ErrorMessage = \"Email 格式不正確\")]",
+          "why": "檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。"
+        },
+        {
+          "line": 33,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 34,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 35,
+          "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 36,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "    [StringLength(100, ErrorMessage = \"備註最多 100 字\")]",
+          "why": "限制下方字串最多 100 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 39,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 40,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週｜收到不等於接受\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">先檢查必填、格式與長度，符合規則才顯示成功摘要。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div asp-validation-summary=\"ModelOnly\" class=\"text-danger\" role=\"alert\"></div>",
+          "why": "顯示模型層級錯誤。ModelOnly 不列出欄位錯誤，所以本週通常留白；欄位提示靠各自的 span。text-danger 設定紅字，role=\"alert\" 提供輔助科技語意。"
+        },
+        {
+          "line": 16,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 17,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 18,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 19,
+          "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 20,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 21,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 22,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 23,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 24,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 25,
+          "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 26,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 27,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 28,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 29,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 30,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 31,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 32,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 33,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 34,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 35,
+          "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 36,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 39,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 40,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 41,
+          "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 42,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 45,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 46,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 47,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 48,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 49,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 50,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 51,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 52,
+          "code": "        <h2 class=\"h4\">報名資料驗證通過</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 53,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 54,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 55,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 56,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 57,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 58,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 59,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 60,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 61,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 62,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 63,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>資料已通過本週規則，但尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 64,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 65,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "using System.ComponentModel.DataAnnotations;",
+          "why": "引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 6,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 7,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 8,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 9,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 10,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 11,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 12,
+          "code": "    public void OnGet() { }",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 13,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 14,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 15,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 16,
+          "code": "        if (!ModelState.IsValid)",
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+        },
+        {
+          "line": 17,
+          "code": "        {",
+          "why": "開始 if (!ModelState.IsValid) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 18,
+          "code": "            return;",
+          "why": "提早離開這次 OnPost，避免繼續設定成功旗標。此方法是 void，因此寫 return;，不是 return Page();。"
+        },
+        {
+          "line": 19,
+          "code": "        }",
+          "why": "結束 if (!ModelState.IsValid) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 21,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 22,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 23,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 24,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 25,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 26,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 27,
+          "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 28,
+          "code": "    [StringLength(20, ErrorMessage = \"顯示名稱最多 20 字\")]",
+          "why": "限制下方字串最多 20 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 29,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 30,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 31,
+          "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 32,
+          "code": "    [EmailAddress(ErrorMessage = \"Email 格式不正確\")]",
+          "why": "檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。"
+        },
+        {
+          "line": 33,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 34,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 35,
+          "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 36,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "    [StringLength(100, ErrorMessage = \"備註最多 100 字\")]",
+          "why": "限制下方字串最多 100 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 39,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 40,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週｜收到不等於接受\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">先檢查必填、格式與長度，符合規則才顯示成功摘要。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div asp-validation-summary=\"ModelOnly\" class=\"text-danger\" role=\"alert\"></div>",
+          "why": "顯示模型層級錯誤。ModelOnly 不列出欄位錯誤，所以本週通常留白；欄位提示靠各自的 span。text-danger 設定紅字，role=\"alert\" 提供輔助科技語意。"
+        },
+        {
+          "line": 16,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 17,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 18,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 19,
+          "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 20,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 21,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 22,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 23,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 24,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 25,
+          "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 26,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 27,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 28,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 29,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 30,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 31,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 32,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 33,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 34,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 35,
+          "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 36,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 39,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 40,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 41,
+          "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 42,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 45,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 46,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 47,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 48,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 49,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 50,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 51,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 52,
+          "code": "        <h2 class=\"h4\">報名資料驗證通過</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 53,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 54,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 55,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 56,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 57,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 58,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 59,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 60,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 61,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 62,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 63,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>資料已通過本週規則，但尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 64,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 65,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    },
+    {
+      "handler": [
+        {
+          "line": 1,
+          "code": "using Microsoft.AspNetCore.Mvc;",
+          "why": "引入 MVC 命名空間，讓下方可以直接寫 [BindProperty]；不是安裝套件。"
+        },
+        {
+          "line": 2,
+          "code": "using Microsoft.AspNetCore.Mvc.RazorPages;",
+          "why": "引入 Razor Pages 型別，讓 IndexModel 可以繼承 PageModel。"
+        },
+        {
+          "line": 3,
+          "code": "using System.ComponentModel.DataAnnotations;",
+          "why": "引入 Required、EmailAddress、StringLength 等標註；規則會用到這些名稱。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "namespace Week06Validation.Pages;",
+          "why": "將類別歸在此專案的 Pages 命名空間。這是檔案範圍語法，後面不用再加 namespace 的大括號；需與本週專案一致。"
+        },
+        {
+          "line": 6,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 7,
+          "code": "public class IndexModel : PageModel",
+          "why": "宣告可存取的頁面處理類別。冒號表示繼承 PageModel，才能使用 ModelState 等 Razor Pages 功能。"
+        },
+        {
+          "line": 8,
+          "code": "{",
+          "why": "開始 public class IndexModel : PageModel 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 9,
+          "code": "    [BindProperty]",
+          "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+        },
+        {
+          "line": 10,
+          "code": "    public RegistrationInput Input { get; set; } = new();",
+          "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+        },
+        {
+          "line": 11,
+          "code": "    public bool Submitted { get; set; }",
+          "why": "這次請求是否顯示成功摘要的旗標；bool 預設為 false。它不會記住上一次請求，也不是資料已入庫的證明。"
+        },
+        {
+          "line": 12,
+          "code": "    public void OnGet() { }",
+          "why": "瀏覽首頁時處理 GET；這裡沒有額外工作，所以方法內容留空。void 表示不回傳值。"
+        },
+        {
+          "line": 13,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 14,
+          "code": "    public void OnPost()",
+          "why": "表單 POST 時執行的方法；void 表示此方法不回傳值，結束後仍可由 Razor Pages 呈現此頁。"
+        },
+        {
+          "line": 15,
+          "code": "    {",
+          "why": "開始 public void OnPost() 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 16,
+          "code": "        if (!ModelState.IsValid)",
+          "why": "! 表示反向：如果繫結或驗證結果有錯誤，就進入這個區塊。規則不是寫在這一行，這裡是檢查結果的閘門。"
+        },
+        {
+          "line": 17,
+          "code": "        {",
+          "why": "開始 if (!ModelState.IsValid) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 18,
+          "code": "            return;",
+          "why": "提早離開這次 OnPost，避免繼續設定成功旗標。此方法是 void，因此寫 return;，不是 return Page();。"
+        },
+        {
+          "line": 19,
+          "code": "        }",
+          "why": "結束 if (!ModelState.IsValid) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 20,
+          "code": "        Submitted = true;",
+          "why": "將本次請求標示為顯示成功摘要。完成版必須先通過上方閘門；第 02 步尚無閘門，所以有規則仍可能顯示成功。"
+        },
+        {
+          "line": 21,
+          "code": "    }",
+          "why": "結束 public void OnPost() 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 22,
+          "code": "}",
+          "why": "結束 public class IndexModel : PageModel 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        },
+        {
+          "line": 23,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 24,
+          "code": "// 表單資料型別：與 IndexModel 放在同一檔案，位於 IndexModel 類別外。",
+          "why": "這是給讀者看的 C# 註解，不會執行；提醒 Input Model 與 IndexModel 是同一檔案中的兩個同層類別。"
+        },
+        {
+          "line": 25,
+          "code": "public class RegistrationInput",
+          "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+        },
+        {
+          "line": 26,
+          "code": "{",
+          "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 27,
+          "code": "    [Required(ErrorMessage = \"請輸入顯示名稱\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 28,
+          "code": "    [StringLength(15, ErrorMessage = \"顯示名稱最多 15 字\")]",
+          "why": "限制下方字串最多 15 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 29,
+          "code": "    public string DisplayName { get; set; } = string.Empty;",
+          "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+        },
+        {
+          "line": 30,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 31,
+          "code": "    [Required(ErrorMessage = \"請輸入 Email\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 32,
+          "code": "    [EmailAddress(ErrorMessage = \"Email 格式不正確\")]",
+          "why": "檢查下方 Email 的格式；是否必填由 [Required] 負責。此標註不能證明信箱存在或收得到信。"
+        },
+        {
+          "line": 33,
+          "code": "    public string Email { get; set; } = string.Empty;",
+          "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+        },
+        {
+          "line": 34,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 35,
+          "code": "    [Required(ErrorMessage = \"請選擇參加場次\")]",
+          "why": "要求下方屬性有非空白值；ErrorMessage 是不符合時顯示的中文提示。規則作用在緊接著的屬性，不是整個頁面。"
+        },
+        {
+          "line": 36,
+          "code": "    public string Session { get; set; } = string.Empty;",
+          "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "    [StringLength(100, ErrorMessage = \"備註最多 100 字\")]",
+          "why": "限制下方字串最多 100 個 .NET 字串長度單位；ErrorMessage 同步寫上限。這不是必填規則；邊界測試使用英文字母，避免 emoji 計數差異。"
+        },
+        {
+          "line": 39,
+          "code": "    public string? Note { get; set; }",
+          "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+        },
+        {
+          "line": 40,
+          "code": "}",
+          "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ],
+      "form": [
+        {
+          "line": 1,
+          "code": "@page",
+          "why": "宣告這個 .cshtml 是可處理請求的 Razor Page；放在檔案最上方。它不是顯示在畫面上的 HTML。"
+        },
+        {
+          "line": 2,
+          "code": "@model IndexModel",
+          "why": "指定此畫面使用 IndexModel。下方的 Model 是這次請求的頁面模型物件，不是 RegistrationInput 類別本身。"
+        },
+        {
+          "line": 3,
+          "code": "@{ ViewData[\"Title\"] = \"第六週｜收到不等於接受\"; }",
+          "why": "Razor 的 C# 區塊：設定頁面標題，由共用 _Layout 讀取，常用於瀏覽器分頁；不是表單欄位。"
+        },
+        {
+          "line": 4,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 5,
+          "code": "<section class=\"activity-hero mb-4\">",
+          "why": "開始一個內容區塊。class 是外觀樣式：activity-hero／registration-result 由課程 CSS 定義，mb-4／alert／alert-success 來自 Bootstrap；不負責資料驗證。"
+        },
+        {
+          "line": 6,
+          "code": "    <p class=\"text-uppercase fw-bold mb-2\">校園活動報名</p>",
+          "why": "顯示活動分類；fw-bold 設粗體、mb-2 設下方間距，text-uppercase 對英文字母轉大寫，對中文字不會產生大小寫變化。"
+        },
+        {
+          "line": 7,
+          "code": "    <h1>東海夜間攝影散步</h1>",
+          "why": "活動的主要標題。h1 表達內容層級，標題文字本身不參與資料繫結。"
+        },
+        {
+          "line": 8,
+          "code": "    <p class=\"lead mb-0\">先檢查必填、格式與長度，符合規則才顯示成功摘要。</p>",
+          "why": "顯示給使用者看的操作說明；lead 調整導讀文字外觀，mb-0 去掉下方間距，不影響表單送出。"
+        },
+        {
+          "line": 9,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 10,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 11,
+          "code": "<section class=\"card shadow-sm\">",
+          "why": "開始表單卡片區塊；card 與 shadow-sm 是 Bootstrap 的卡片與淡陰影樣式。section 表示內容分區，不是驗證規則。"
+        },
+        {
+          "line": 12,
+          "code": "    <div class=\"card-body p-4\">",
+          "why": "開始卡片內容區；card-body 與 p-4 提供 Bootstrap 的內距，避免表單緊貼邊框。"
+        },
+        {
+          "line": 13,
+          "code": "        <h2 class=\"h4\">填寫報名資料</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 14,
+          "code": "        <form method=\"post\" novalidate>",
+          "why": "建立送出表單。method=\"post\" 把欄位送到同一頁的 OnPost；novalidate 只略過瀏覽器原生驗證，後端仍檢查。本版不載入 jQuery 驗證；Form Tag Helper 會加入防偽權杖。"
+        },
+        {
+          "line": 15,
+          "code": "            <div asp-validation-summary=\"ModelOnly\" class=\"text-danger\" role=\"alert\"></div>",
+          "why": "顯示模型層級錯誤。ModelOnly 不列出欄位錯誤，所以本週通常留白；欄位提示靠各自的 span。text-danger 設定紅字，role=\"alert\" 提供輔助科技語意。"
+        },
+        {
+          "line": 16,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 17,
+          "code": "                <label asp-for=\"Input.DisplayName\" class=\"form-label\">顯示名稱</label>",
+          "why": "顯示「顯示名稱」標籤；asp-for=\"Input.DisplayName\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 18,
+          "code": "                <input asp-for=\"Input.DisplayName\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.DisplayName\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 19,
+          "code": "                <span asp-validation-for=\"Input.DisplayName\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.DisplayName 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 20,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 21,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 22,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 23,
+          "code": "                <label asp-for=\"Input.Email\" class=\"form-label\">Email</label>",
+          "why": "顯示「Email」標籤；asp-for=\"Input.Email\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 24,
+          "code": "                <input asp-for=\"Input.Email\" class=\"form-control\">",
+          "why": "單行輸入框。asp-for=\"Input.Email\" 產生 name、id 與目前值，讓 POST 找到同名屬性；也會依型別／標註產生 type 與驗證屬性。form-control 是 Bootstrap 外觀，input 不需結束標籤。"
+        },
+        {
+          "line": 25,
+          "code": "                <span asp-validation-for=\"Input.Email\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Email 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 26,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 27,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 28,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 29,
+          "code": "                <label asp-for=\"Input.Session\" class=\"form-label\">參加場次</label>",
+          "why": "顯示「場次」標籤；asp-for=\"Input.Session\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 30,
+          "code": "                <select asp-for=\"Input.Session\" class=\"form-select\">",
+          "why": "建立場次選單。asp-for=\"Input.Session\" 產生欄位名稱並依目前值選回選項，錯誤後能保留選擇；form-select 控制外觀。"
+        },
+        {
+          "line": 31,
+          "code": "                    <option value=\"\">請選擇參加場次</option>",
+          "why": "預設提示的 value 刻意是空字串；未選場次送出空值，後端 [Required] 才能擋下。顯示文字與送出的 value 是兩回事。"
+        },
+        {
+          "line": 32,
+          "code": "                    <option value=\"週三晚上\">週三晚上</option>",
+          "why": "顯示並送出「週三晚上」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 33,
+          "code": "                    <option value=\"週六下午\">週六下午</option>",
+          "why": "顯示並送出「週六下午」這個場次值。value 是送到 Input.Session 的內容；本週 [Required] 只檢查有值，尚未驗證值是否屬於合法場次清單。"
+        },
+        {
+          "line": 34,
+          "code": "                </select>",
+          "why": "結束場次選單；所有 option 都放在 select 裡。"
+        },
+        {
+          "line": 35,
+          "code": "                <span asp-validation-for=\"Input.Session\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Session 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 36,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 37,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 38,
+          "code": "            <div class=\"mb-3\">",
+          "why": "把同一欄位的標籤、輸入框、錯誤提示包成一組；mb-3 增加下方間距，屬於排版用途。"
+        },
+        {
+          "line": 39,
+          "code": "                <label asp-for=\"Input.Note\" class=\"form-label\">備註</label>",
+          "why": "顯示「備註」標籤；asp-for=\"Input.Note\" 讓 Tag Helper 產生對應輸入框的 for，點標籤就能聚焦欄位。form-label 只控制外觀。"
+        },
+        {
+          "line": 40,
+          "code": "                <textarea asp-for=\"Input.Note\" class=\"form-control\" rows=\"3\"></textarea>",
+          "why": "多行備註欄位。asp-for 對到 Input.Note；rows=\"3\" 設定可見高度，不是最多三行或長度限制。需要成對的結束標籤，100 字上限在後端。"
+        },
+        {
+          "line": 41,
+          "code": "                <span asp-validation-for=\"Input.Note\" class=\"text-danger\"></span>",
+          "why": "顯示 Input.Note 的驗證錯誤。路徑要與同欄位 asp-for 一致；沒有錯誤時留空。text-danger 將提示顯示成紅字，並不是固定寫死的錯誤。"
+        },
+        {
+          "line": 42,
+          "code": "            </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 43,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 44,
+          "code": "            <button type=\"submit\" class=\"btn btn-primary\">送出報名</button>",
+          "why": "type=\"submit\" 讓按鈕送出所在表單；btn 與 btn-primary 只決定外觀。按下後仍必須由後端決定能否成功。"
+        },
+        {
+          "line": 45,
+          "code": "        </form>",
+          "why": "結束表單範圍。送出按鈕與要送出的欄位必須在表單內；不要再套第二層 form。"
+        },
+        {
+          "line": 46,
+          "code": "    </div>",
+          "why": "關閉最近尚未結束的 div 容器；縮排幫助你分清是欄位群組還是整張卡片。"
+        },
+        {
+          "line": 47,
+          "code": "</section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 48,
+          "code": "",
+          "why": "空白行：分隔不同段落，方便閱讀；不會改變執行結果。"
+        },
+        {
+          "line": 49,
+          "code": "@if (Model.Submitted)",
+          "why": "Razor 在伺服器檢查這次請求的成功旗標，只有 true 才輸出下方摘要；不是瀏覽器 JavaScript，也不代表資料已保存。"
+        },
+        {
+          "line": 50,
+          "code": "{",
+          "why": "開始 @if (Model.Submitted) 的內容；大括號決定哪些程式屬於這個範圍。"
+        },
+        {
+          "line": 51,
+          "code": "    <section class=\"alert alert-success registration-result\" role=\"status\">",
+          "why": "開始成功摘要區。alert／alert-success 是 Bootstrap 的成功樣式，registration-result 是課程自訂樣式；role=\"status\" 提供輔助科技狀態語意。是否顯示由上方 @if 決定，並不是 class 決定成功。"
+        },
+        {
+          "line": 52,
+          "code": "        <h2 class=\"h4\">報名資料驗證通過</h2>",
+          "why": "區塊的次標題：表單區或成功摘要。h4 類別只調整字體外觀，HTML 語意仍然是 h2。"
+        },
+        {
+          "line": 53,
+          "code": "        <dl class=\"mb-3\">",
+          "why": "開始名稱／值對照的摘要列表；dt 寫欄位名稱、dd 寫資料。mb-3 增加下方間距。"
+        },
+        {
+          "line": 54,
+          "code": "            <dt>參加者</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 55,
+          "code": "            <dd>@Model.Input.DisplayName</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.DisplayName，輸出這次送來的顯示名稱。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 56,
+          "code": "            <dt>Email</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 57,
+          "code": "            <dd>@Model.Input.Email</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Email，輸出這次送來的Email。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 58,
+          "code": "            <dt>場次</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 59,
+          "code": "            <dd>@Model.Input.Session</dd>",
+          "why": "用 Razor 的 @ 讀取 Model.Input.Session，輸出這次送來的場次。預設會做 HTML 編碼；這是顯示資料，不是新增輸入框或寫入資料庫。"
+        },
+        {
+          "line": 60,
+          "code": "            <dt>備註</dt>",
+          "why": "摘要中的欄位名稱，例如參加者或 Email；只是閱讀標籤，不會再送出一份表單資料。"
+        },
+        {
+          "line": 61,
+          "code": "            <dd>@(string.IsNullOrWhiteSpace(Model.Input.Note) ? \"無\" : Model.Input.Note)</dd>",
+          "why": "先判斷備註是否為 null、空字串或純空白；? 左側條件成立就顯示「無」，否則顯示 Input.Note。@(...) 把完整 C# 運算式的結果輸出到摘要。"
+        },
+        {
+          "line": 62,
+          "code": "        </dl>",
+          "why": "結束摘要的名稱／值列表。"
+        },
+        {
+          "line": 63,
+          "code": "        <p class=\"mb-0\"><strong>本週限制：</strong>資料已通過本週規則，但尚未寫入資料庫。</p>",
+          "why": "顯示課程限制提醒；strong 強調重點，mb-0 移除段落下方間距。這段文字不會執行驗證或儲存資料。"
+        },
+        {
+          "line": 64,
+          "code": "    </section>",
+          "why": "關閉對應的 section 區塊，讓下方內容不再屬於這個區塊。"
+        },
+        {
+          "line": 65,
+          "code": "}",
+          "why": "結束 @if (Model.Submitted) 的範圍；括號要成對，下一段程式應放在正確範圍。"
+        }
+      ]
+    }
+  ],
+  "model": [
+    {
+      "line": 1,
+      "code": "public class RegistrationInput",
+      "why": "宣告表單資料型別；class 是資料的結構定義，RegistrationInput 是自訂名稱。這一行不會建立物件，也不會建立資料表。"
+    },
+    {
+      "line": 2,
+      "code": "{",
+      "why": "開始 public class RegistrationInput 的內容；大括號決定哪些程式屬於這個範圍。"
+    },
+    {
+      "line": 3,
+      "code": "    public string DisplayName { get; set; } = string.Empty;",
+      "why": "DisplayName 承接「顯示名稱」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。"
+    },
+    {
+      "line": 4,
+      "code": "    public string Email { get; set; } = string.Empty;",
+      "why": "Email 承接「Email」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 名叫 Email 不會自動檢查格式；要靠 [EmailAddress]。"
+    },
+    {
+      "line": 5,
+      "code": "    public string Session { get; set; } = string.Empty;",
+      "why": "Session 承接「場次」。public 讓框架可存取，string 存文字，get 讀取、set 寫入；= string.Empty 將初始值設為空字串，分號結束宣告。空字串不代表已填寫或通過驗證。 選單送來的是 option 的 value，本週用文字而非數字。"
+    },
+    {
+      "line": 6,
+      "code": "    public string? Note { get; set; }",
+      "why": "Note 承接備註。string? 允許 null（沒有值），get/set 可讀寫；不需要先填空字串。能否留白與長度規則還要看驗證標註。"
+    },
+    {
+      "line": 7,
+      "code": "}",
+      "why": "結束 public class RegistrationInput 的範圍；括號要成對，下一段程式應放在正確範圍。"
+    }
+  ],
+  "binding": [
+    {
+      "line": 1,
+      "code": "[BindProperty]",
+      "why": "讓框架在 POST 時，把表單欄位繫結到下方 Input 屬性；預設不會對 GET 做這項屬性繫結。"
+    },
+    {
+      "line": 2,
+      "code": "public RegistrationInput Input { get; set; } = new();",
+      "why": "Input 是 IndexModel 的屬性，型別是 RegistrationInput。get 供讀取、set 供寫入；new() 建立初始物件，頁面便能讀取其欄位。它不是另一個類別或資料庫。"
+    }
+  ]
+}

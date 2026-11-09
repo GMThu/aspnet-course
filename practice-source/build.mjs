@@ -1,9 +1,11 @@
 import {build} from 'esbuild';
+import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=path.dirname(fileURLToPath(import.meta.url));
+execFileSync('python3',[path.join(root,'tools/build_week06_explanations.py')],{stdio:'inherit'});
 const output=path.resolve(root,'../practice');
 const base='/aspnet-course/practice/';
 await mkdir(path.join(output,'assets'),{recursive:true});

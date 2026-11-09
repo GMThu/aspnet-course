@@ -31,3 +31,7 @@ npm run build
 從公開 Week06-starter.zip 起跑，核對第 00–07 步。修正：起跑畫面使用第六週標題；起跑 form 預先加入 novalidate，避免第 02 步 Email 標註觸發瀏覽器攔截；HTTP 指令改用 --launch-profile http，以保留開發環境與靜態資源設定。
 
 verify_week06_checkpoints.py 現在在同一份起跑專案依序只修改講義指定檔案，檢查八步建置、CSS HTTP 回應與 72 次連續 POST，涵蓋空白、Email、名稱邊界、備註 100/101 字，以及成功後再次失敗。另以瀏覽器核對起跑、第 02/03 步、欄位錯誤、修正成功與邊界畫面。驗證環境為 macOS/.NET 10，未執行 Windows Visual Studio 介面。
+
+## 逐行說明
+
+`npm run build` 會先執行 `tools/build_week06_explanations.py`，從目前 checkpoints.json 產生 explanations.json。每一行（含空行、括號、結束標籤）都有對應解說；遇到未涵蓋的新程式行會停止建置，避免解說與程式版本脫節。學生第 01 步直接顯示 Input Model 與 BindProperty 解說；各步完整程式碼區另有後端與 HTML/Razor 全檔逐行說明。複製按鈕仍只複製原本可執行程式。
