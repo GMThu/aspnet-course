@@ -7,5 +7,9 @@
 <span asp-validation-for="Input.Session" class="text-danger"></span>
 <span asp-validation-for="Input.Note" class="text-danger"></span>
 
-@* 教學時若要固定看到後端驗證，可暫時讓 form 使用 novalidate： *@
+@* 修改原本的 form 開始標籤，不要新增第二層 form。
+   novalidate 只關閉瀏覽器原生驗證；本週也不載入 _ValidationScriptsPartial，
+   才能固定觀察後端 DataAnnotations 與 ModelState 的結果。
+   下方只是開始標籤，原有欄位和結束標籤 </form> 必須保留。
+   完整可貼檔案：https://gmthu.github.io/aspnet-course/practice/week06/ *@
 <form method="post" novalidate>

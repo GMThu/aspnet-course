@@ -119,3 +119,7 @@ uv run --with pymupdf python tools/check_pdf_links.py https://gmthu.github.io/as
 新增獨立靜態手冊，含逐步操作、程式碼複製、瀏覽器本機進度、驗收與排錯，以及階段專案下載。原簡報與下載包保留。
 
 來源在 `practice-source/`；重建方式見該目錄 README。產物在 `practice/`，直接由現有 GitHub Pages 發布。
+
+## 第六週互動簡報修訂
+
+第六週網頁擴充為 30 頁；教師小抄、控制台跳頁與學生總覽已同步。修正 C# 大括號、加入起跑／類別位置／前後端驗證／分段實作／邊界測試／Boss 準備頁，並改善閱讀模式返回與進度保存。既有 PDF 保留為原版，頁碼與修訂內容以網頁為準。
