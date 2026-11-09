@@ -1,9 +1,10 @@
-Step 00: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 01: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 02: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 03: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 04: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 05: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 06: sequential edits + build + CSS + 9 chained POST cases PASS
-Step 07: sequential edits + build + CSS + 9 chained POST cases PASS
+Downloaded published starter; SHA256 413a6bfead4eaed37273492cc7884fa69b245c8b833a49356d7505c5a9e00dc6
+Step 00: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 01: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 02: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 03: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 04: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 05: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 06: sequential edits + build + CSS + 12 chained POST cases PASS
+Step 07: sequential edits + build + CSS + 12 chained POST cases PASS
 Tested on macOS arm64 / .NET 10; Windows Visual Studio UI not executed.

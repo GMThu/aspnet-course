@@ -1,12 +1,15 @@
 from pathlib import Path
-import os,json,tempfile,zipfile,subprocess,time,urllib.request,urllib.parse,http.cookiejar,re,html
+import os,json,tempfile,zipfile,subprocess,time,urllib.request,urllib.parse,http.cookiejar,re,html,io,hashlib
 root=Path(__file__).resolve().parents[1]
 dotnet=os.environ.get('DOTNET','dotnet')
 env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1')
 env.pop('ASPNETCORE_ENVIRONMENT',None)
 results=[]
 with tempfile.TemporaryDirectory(prefix='week06-steps-',dir=root) as td:
- with zipfile.ZipFile(root/'downloads/Week06-starter.zip') as z:z.extractall(td)
+ downloaded=urllib.request.urlopen('https://gmthu.github.io/aspnet-course/practice/downloads/Week06-starter.zip').read()
+ assert downloaded==(root/'downloads/Week06-starter.zip').read_bytes(), 'Published starter differs from source'
+ results.append('Downloaded published starter; SHA256 '+hashlib.sha256(downloaded).hexdigest())
+ with zipfile.ZipFile(io.BytesIO(downloaded)) as z:z.extractall(td)
  p=Path(td)/'Week06Validation'
  checkpoints=json.loads((root/'src/week06/checkpoints.json').read_text())
  for step in range(8):
@@ -30,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix='week06-steps-',dir=root) as td:
    for asset in ['/css/site.css','/lib/bootstrap/dist/css/bootstrap.min.css']:
     response=client.open(url.rstrip('/')+asset);assert response.status==200 and 'css' in response.headers.get('Content-Type','')
    valid={'Input.DisplayName':'小安','Input.Email':'student-a@example.com','Input.Session':'週三晚上','Input.Note':''}
-   for name,data,ok in [('valid',valid,True),('bad-email',{**valid,'Input.Email':'abc'},step<3),('blank',dict.fromkeys(valid,''),step<3),('boundary-pass',{**valid,'Input.DisplayName':'A'*(15 if step==7 else 20)},True),('boundary-fail',{**valid,'Input.DisplayName':'A'*(16 if step==7 else 21)},step<3),('note-100',{**valid,'Input.Note':'A'*100},True),('note-101',{**valid,'Input.Note':'A'*101},step<3),('corrected',valid,True),('invalid-after-success',{**valid,'Input.Email':'abc'},step<3)]:
+   for name,data,ok in [('valid',valid,True),('bad-email',{**valid,'Input.Email':'abc'},step<3),('blank',dict.fromkeys(valid,''),step<3),('blank-name',{**valid,'Input.DisplayName':''},step<3),('blank-email',{**valid,'Input.Email':''},step<3),('spaces-name',{**valid,'Input.DisplayName':'   '},step<3),('boundary-pass',{**valid,'Input.DisplayName':'A'*(15 if step==7 else 20)},True),('boundary-fail',{**valid,'Input.DisplayName':'A'*(16 if step==7 else 21)},step<3),('note-100',{**valid,'Input.Note':'A'*100},True),('note-101',{**valid,'Input.Note':'A'*101},step<3),('corrected',valid,True),('invalid-after-success',{**valid,'Input.Email':'abc'},step<3)]:
     token=html.unescape(re.search(r'name="__RequestVerificationToken"[^>]*value="([^"]+)"',page)[1])
     body=html.unescape(client.open(url,urllib.parse.urlencode({**data,'__RequestVerificationToken':token}).encode()).read().decode())
     success='報名資料已收到' if step<4 else '報名資料驗證通過'
@@ -40,10 +43,13 @@ with tempfile.TemporaryDirectory(prefix='week06-steps-',dir=root) as td:
      assert 'value="小安"' in body
     if step>=4 and name=='blank':
      for field,msg in [('DisplayName','請輸入顯示名稱'),('Email','請輸入 Email'),('Session','請選擇參加場次')]:assert re.search(fr'<span[^>]*data-valmsg-for="Input.{field}"[^>]*>{msg}</span>',body)
+    if step>=4 and name in ['blank-name','spaces-name','blank-email']:
+     field,msg=('Email','請輸入 Email') if name=='blank-email' else ('DisplayName','請輸入顯示名稱')
+     assert re.search(fr'<span[^>]*data-valmsg-for="Input.{field}"[^>]*>{msg}</span>',body),(step,name)
     if step>=4 and name=='note-101':assert re.search(r'<span[^>]*data-valmsg-for="Input.Note"[^>]*>備註最多 100 字</span>',body)
     page=body
     if step==3 and name=='bad-email':assert 'data-valmsg-for="Input.Email"' not in body
-   results.append(f'Step {step:02d}: sequential edits + build + CSS + 9 chained POST cases PASS');print(results[-1],flush=True)
+   results.append(f'Step {step:02d}: sequential edits + build + CSS + 12 chained POST cases PASS');print(results[-1],flush=True)
   finally:
    server.terminate();server.wait(timeout=10);log.close()
 # Restore the exact course rule after the step07 experiment.

@@ -98,3 +98,8 @@
 還原後，合法資料成功、abc 失敗都要重測。第02步只有規則、第03步還沒有提示，不要提前要求第04步畫面。
 
 依據：[Microsoft 模型驗證與隱含必填](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-10.0)。
+
+
+## 必填與送出的區別
+
+Required 表示空白不能通過驗證，不是禁用送出按鈕。先問清楚是可以送出，還是仍有成功摘要。本週 novalidate 刻意觀察後端：02只有規則仍可能顯示成功；03無摘要但尚無紅字；04紅字且無摘要。學生第05步新增 A1 只空白名稱、A2 只空白 Email，其他欄位合法。留意自動填入，以及前端 maxlength／氣泡不代表後端已驗證。
