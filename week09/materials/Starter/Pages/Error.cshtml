@@ -1,0 +1,14 @@
+@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "發生錯誤";
+}
+
+<section class="card">
+    <h1>網站暫時無法完成要求</h1>
+    <p>請回到上一頁再試一次；備課時請查看 Visual Studio 的第一個錯誤訊息。</p>
+    @if (Model.ShowRequestId)
+    {
+        <p><strong>Request ID：</strong><code>@Model.RequestId</code></p>
+    }
+</section>

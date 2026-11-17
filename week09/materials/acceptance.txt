@@ -1,0 +1,13 @@
+第九週 EF Core 新增與查詢驗收
+姓名／組別：
+工作資料夾：
+SDK／EF Core 版本：
+SSMS 伺服器／資料庫：
+Migration 套用結果：
+新增前／後總筆數：
+新增 Id／假姓名／Email／場次／備註：
+空欄與 Email=abc：錯誤訊息／筆數是否不變／清單是否仍在：
+成功後重新整理的筆數：
+關閉網站再啟動的同一 Id：
+Input、Registration、Context 各做什麼：
+錯誤第一行／修正／複測：

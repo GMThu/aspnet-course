@@ -1,0 +1,66 @@
+@page
+@model IndexModel
+@{ ViewData["Title"] = "活動報名"; }
+<header class="hero"><p class="eyebrow">WEEK 09 · EF CORE × SQL SERVER</p><h1>新增一筆報名，<br />再把它查回來。</h1><p>延續第六週的表單：顯示名稱、Email、場次、備註。</p></header>
+<div class="notice">課堂練習請使用假資料，例如 xiaoan@example.com。</div>
+@if (!string.IsNullOrEmpty(Model.SavedMessage))
+{
+    <section class="card success" role="status">@Model.SavedMessage</section>
+}
+<div class="content-grid">
+    <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">校園攝影散步報名</h2>
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div>
+
+            <div class="field">
+                <label asp-for="Input.DisplayName"></label>
+                <input asp-for="Input.DisplayName" autocomplete="off" />
+                <span asp-validation-for="Input.DisplayName" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" autocomplete="off" />
+                <span asp-validation-for="Input.Email" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Input.Session"></label>
+                <select asp-for="Input.Session">
+                    <option value="">請選擇參加場次</option>
+                    <option value="週三晚上">週三晚上</option>
+                    <option value="週六下午">週六下午</option>
+                </select>
+                <span asp-validation-for="Input.Session" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Input.Note">備註（選填，最多 100 字）</label>
+                <textarea asp-for="Input.Note" rows="4"></textarea>
+                <span asp-validation-for="Input.Note" class="field-error"></span>
+            </div>
+
+            <button type="submit">送出報名</button>
+        </form>
+    </section>
+
+<aside><section class="card" aria-labelledby="list-title"><h2 id="list-title">最近 10 筆報名</h2>
+@if (Model.Registrations.Count == 0)
+{
+    <p id="empty-list">目前沒有報名資料，請先新增一筆。</p>
+}
+else
+{
+    <ul class="registration-list">
+    @foreach (var item in Model.Registrations)
+    {
+        <li data-registration-id="@item.Id">
+            <strong>#@item.Id · @item.DisplayName</strong>
+            <p>@item.Email<br />@item.Session<br />@(string.IsNullOrWhiteSpace(item.Note) ? "無備註" : item.Note)</p>
+        </li>
+    }
+    </ul>
+}
+<p>依 Id 由大到小，只顯示最近 10 筆；其他資料仍保存在資料庫。</p>
+</section></aside></div>

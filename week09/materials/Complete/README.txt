@@ -1,0 +1,1 @@
+第九週完成版，與三段 Checkpoints 的最終程式相同。此版附 Migration，請勿再執行 migrations add InitialCreate。先核對 appsettings.json 的伺服器與 CampusActivityLab09，再 dotnet restore、dotnet tool restore、dotnet ef database update、dotnet run --launch-profile http。首次還原需要網路。
