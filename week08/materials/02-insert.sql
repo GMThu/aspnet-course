@@ -1,9 +1,6 @@
+-- 對應指南步驟 7；已貼上同一段 INSERT 成功，就不要再執行本檔。
 USE CampusActivityLab08;
 GO
--- 每執行一次 INSERT 就新增一筆；先查筆數，只執行一次。
+-- 整份只執行一次；看 Messages 的影響 1 列，再開 03-select.sql 查詢。
 INSERT INTO dbo.Registrations (DisplayName, Session)
 VALUES (N'小安', N'上午場');
-
-SELECT Id, DisplayName, Session
-FROM dbo.Registrations
-ORDER BY Id;
