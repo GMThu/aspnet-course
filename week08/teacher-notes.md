@@ -10,6 +10,6 @@
 - 90 分鐘追加：15 分篩選排序（17–18 頁）、10 分個人練習（19 頁）、5 分串接預告與收束（19–20 頁）。
 
 巡視停點：第 9 頁 DB_NAME、第 13–14 頁只新增一次並查回、第 16 頁共同驗收。
-官方截圖保留原始內容；TutorialDB／Customers 對照本課 CampusActivityLab08／Registrations，不直接照抄範例 SQL。
+建庫、選庫、資料表與查詢圖已改為課程示意圖，名稱統一為 CampusActivityLab08／dbo.Registrations；查詢使用 Id、DisplayName、Session 與小安／上午場。
 學生包附 images/ 與 screenshot-sources.html，離線仍可看圖。SQL 第一次建庫／建表各執行一次；01-setup.sql 僅作可重跑備援。
 EF Core 完整教材在 ef-core/，另需約 150 分鐘，不列本週必做。
