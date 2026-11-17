@@ -9,7 +9,8 @@
 3. 03-select.sql：查詢，可重複執行。
 4. 04-optional-filter.sql：90 分鐘選做。選 A 段（含 USE／GO）執行一次，之後只選 B 段（含 USE／GO）查詢。
 5. acceptance.txt：完成證據。
-6. demo-complete.html：瀏覽器結果示意，不連線 SQL Server，不能當作實機驗收。
+6. Week08-SSMS-Student-Guide.pdf：A4 共 11 頁，含操作前準備、九步截圖／SQL／成功檢核、排錯與完成紀錄；可離線列印。
+7. demo-complete.html：瀏覽器結果示意，不連線 SQL Server，不能當作實機驗收。
 
 60 分鐘只要求連線、認識表格、INSERT、SELECT 與關閉查詢分頁後再查。
 90 分鐘再加 WHERE、ORDER BY 與個人練習。不要求 EF Core/Migration。
