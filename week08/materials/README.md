@@ -17,4 +17,4 @@
 原 EF Core 完整教材移到 ../ef-core/，另需約 150 分鐘；使用另一個 CampusActivityDb 由 Migration 建表。
 SQL 檔為 UTF-8；只用課堂假資料。官方參考：https://learn.microsoft.com/en-us/ssms/quickstarts/ssms-connect-query-sql-server
 
-圖片在 images/，來源與版本差異見 screenshot-sources.html。解壓縮時保留資料夾結構，離線開啟 start-here.html 仍可看圖。圖片名稱與 SQL 一致：CampusActivityLab08／dbo.Registrations。四張圖片已調整為課程示意圖，並非實機重拍。
+圖片在 images/，來源與版本差異見 screenshot-sources.html。解壓縮時保留資料夾結構，離線開啟 start-here.html 仍可看圖。圖片名稱與 SQL 一致：CampusActivityLab08／dbo.Registrations。六張圖片已調整為課程示意圖，並非實機重拍。
