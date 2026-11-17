@@ -127,7 +127,7 @@ uv run --with pymupdf python tools/check_pdf_links.py https://gmthu.github.io/as
 ## 第七、八週調整
 
 - [第七週期中報告](https://gmthu.github.io/aspnet-course/week07/)：8 頁說明、PDF、報告準備包、教師指南與控制台。
-- [第八週 SQL Server 入門](https://gmthu.github.io/aspnet-course/week08/)：18 頁，60 分鐘必做，90 分鐘選做；SSMS 操作指南、SQL 練習包、結果示意與新版 PDF。
+- [第八週 SQL Server 入門](https://gmthu.github.io/aspnet-course/week08/)：20 頁 SSMS 截圖版，60 分鐘必做，90 分鐘選做；SSMS 操作指南、SQL 練習包、結果示意與新版 PDF。
 - [EF Core 完整延伸](https://gmthu.github.io/aspnet-course/week08/ef-core/)：原資料庫串接教材完整搬移，週次、命名、namespace、教師專案與下載包統一為 Week08。24 頁、約 150 分鐘，不列第八週入門必做。
 - 入門資料庫為 `CampusActivityLab08`，EF Core 延伸使用 `CampusActivityDb`；避免手動建表與 Migration 衝突。
 - 第一週課程地圖與 PDF 同步更新：第 7 週期中，第 16 週期末。
