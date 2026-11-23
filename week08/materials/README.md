@@ -9,7 +9,7 @@
 3. 步驟 5／簡報第 10 頁：01-create-table.sql，第一次建立 dbo.Registrations；已有表則核對欄位，不重建。
 4. 步驟 7／第 12 頁：02-insert.sql，新增小安／上午場，只執行一次。
 5. 步驟 8、9／第 13、15 頁：03-select.sql，查詢可重跑；不再跑 INSERT。
-6. 有時間才教：04-optional-filter.sql 只查現有資料，練習 SELECT／WHERE／ORDER BY，整份可重跑。05-ai-sql-prompt.txt 提供 AI 提問範例；先核對再執行。
+6. 有時間才教：04-optional-filter.sql 只查現有資料，練習 SELECT／WHERE／ORDER BY，整份可重跑。05-ai-sql-prompt.txt 提供右鍵複製結構的步驟與 AI 提問範例：dbo.Registrations → Script Table as → CREATE To → Clipboard；把實際結構貼給 AI，不用手打欄位。結構腳本不執行；只核對並執行 AI 產生的 SELECT。
 
 開 SQL 檔：完整解壓後，在 SSMS 用 File → Open → File 開啟 .sql；確認同一伺服器和資料庫。未反白時 F5 執行整頁，有反白時只執行選取部分。網頁 SQL 與檔案擇一執行，尤其 INSERT 不要重複跑。
 

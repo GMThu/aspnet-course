@@ -1,9 +1,17 @@
-課後複習／選用｜AI 產生 SQL
+課後複習／選用｜從 SSMS 複製結構給 AI
+
+1. 先把下方提問範例貼到 AI，暫不送出；回 SSMS 展開 CampusActivityLab08 → Tables，右鍵 dbo.Registrations。
+2. 選 Script Table as → CREATE To → Clipboard（複製到剪貼簿）。
+3. 回到 AI，用剛複製的結構取代提問最後一行；確認包含 CREATE TABLE 與三個欄位後送出。
+備援：CREATE To → New Query Editor Window，再 Ctrl+A、Ctrl+C；不要按 F5 執行建表。
+先複製提問範例，再從 SSMS 複製結構，避免覆蓋剪貼簿。
 
 我使用 SQL Server，資料庫是 CampusActivityLab08。
-資料表 dbo.Registrations 有 Id int、DisplayName nvarchar(20)、Session nvarchar(20)。
-請查出上午場的 Id、DisplayName、Session，依 Id 由大到小排列。
-只產生讀取既有資料的 SELECT，不要新增、修改、刪除或建立物件。
-請逐行解釋，並說明如何核對結果；資訊不足先問我，不要猜欄位。
+以下是從 SSMS 複製的現有資料表結構，僅供理解，不要重新建表。
+請查出上午場的編號、姓名和場次，依編號由大到小排列。
+只產生讀取既有資料的 SELECT，使用結構中的實際欄位，不要修改資料。
+請逐行解釋與說明預期結果；資訊不足先問我，不要猜欄位。
+【在這裡貼上 SSMS 複製的完整結構腳本】
 
-核對：表名與三欄、上午場、Id DESC；只讀取既有資料。若出現寫入、刪除或 SELECT INTO，先要求修正。先預測再執行；不懂先問老師。
+核對：dbo.Registrations 與 Id／DisplayName／Session；上午場、Id DESC。只查詢既有資料，不接受寫入、建表或 SELECT INTO。
+只有一筆時排序看起來一樣；沒有下午場資料時，查下午場出現 0 列正常。
