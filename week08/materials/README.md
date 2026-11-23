@@ -3,6 +3,8 @@
 先讀含課程介面圖解與九個小步驟的 start-here.html，使用已安裝 SQL Server Express 與 SSMS 的 Windows 電腦。
 本週練習資料庫 CampusActivityLab08；不要在 master 建表。
 
+先在 SSMS 連線；依 File → Open → File 開啟下面各檔，確認伺服器及資料庫後按 F5。主課按 00 → 01-create-table → 02 → 03 順序，不是把所有 .sql 一起執行。
+
 1. 00-create-database.sql：第一次建庫；01-create-table.sql：第一次建表。物件已存在就跳過。
    01-setup.sql：可重跑的建庫／建表備援，不刪既有資料。
 2. 02-insert.sql：新增一筆小安。每次執行都會新增一筆，請只執行一次。
