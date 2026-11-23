@@ -21,7 +21,7 @@ GO
 SELECT Id, DisplayName, Session
 FROM dbo.Registrations
 WHERE Session = N&#x27;上午場&#x27;
-ORDER BY Id DESC;</pre><p>SELECT 選出三欄；FROM 指定 dbo.Registrations；WHERE 只看上午場；ORDER BY Id DESC 將較大 Id 排在前面。這段查詢不會新增或刪掉資料。</p><p>中文字串寫 N'上午場'；ASC 由小到大，DESC 由大到小；分號表示指令結束。沒有 ORDER BY 不保證順序。</p><p>選做：改成下午場；改成 Id ASC；改成不存在的場次。每次先預測再執行，0 列可能是正確結果，不用為練習另外新增資料。</p><p>成功檢核：能解釋條件與排序，核對每列場次及 Id 順序；查詢前後資料筆數不增加。</p></section><section class="optional-appendix" id="ai-sql"><h2>選用補充 B｜請 AI 產生 SQL</h2><p>提供資料庫種類、表名、欄位、想看的資料與排序。可使用以下提示；本課只用假資料與表結構，不貼帳密或真實個資。</p><button class="action secondary sql-copy" type="button" data-copy="guide-ai-prompt">複製 AI 提問</button><pre class="code" id="guide-ai-prompt">我使用 SQL Server，資料庫是 CampusActivityLab08。
+ORDER BY Id DESC;</pre><p>SELECT 選出三欄；FROM 指定 dbo.Registrations；WHERE 只看上午場；ORDER BY Id DESC 將較大 Id 排在前面。這段查詢不會新增或刪掉資料。</p><p>中文字串寫 N'上午場'；ASC 由小到大，DESC 由大到小；分號表示指令結束。沒有 ORDER BY 不保證順序。</p><p>只有一筆資料時，排序前後看起來會一樣，這是正常的。沒有下午場資料時，查詢出現 0 列也是正常的，不代表操作錯誤。</p><p>選做：改成下午場；改成 Id ASC；改成不存在的場次。每次先預測再執行，0 列可能是正確結果，不用為練習另外新增資料。</p><p>成功檢核：能解釋條件與排序，核對每列場次及 Id 順序；查詢前後資料筆數不增加。</p></section><section class="optional-appendix" id="ai-sql"><h2>選用補充 B｜請 AI 產生 SQL</h2><p>提供資料庫種類、表名、欄位、想看的資料與排序。可使用以下提示；本課只用假資料與表結構，不貼帳密或真實個資。</p><button class="action secondary sql-copy" type="button" data-copy="guide-ai-prompt">複製 AI 提問</button><pre class="code" id="guide-ai-prompt">我使用 SQL Server，資料庫是 CampusActivityLab08。
 資料表 dbo.Registrations 有 Id int、DisplayName nvarchar(20)、Session nvarchar(20)。
 請查出上午場的 Id、DisplayName、Session，依 Id 由大到小排列。
 只產生讀取既有資料的 SELECT，不要新增、修改、刪除或建立物件。
