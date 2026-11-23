@@ -27,3 +27,5 @@
 
 第 22 頁選用快練：06-optional-six-rows.sql 只跑一次，新增六筆（兩個場次各三筆）；07-optional-find.sql 查下午場可重跑，結果比原本多三筆。網頁與檔案擇一新增，避免重複。
 新增圖片 images/course-script-table.png 依官方截圖調整並標號 1–4，非實機重拍。
+
+六筆快練操作圖：images/course-six-insert.png 顯示影響 6 列；images/course-six-results.png 顯示下午場三筆。結果圖假設原有 Id 1 小安／上午場，再新增六筆；Id 是示意值。兩圖均非實機重拍。
