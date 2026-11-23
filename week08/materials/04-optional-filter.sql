@@ -1,18 +1,15 @@
--- 90 分鐘選做。不要整份重複執行；選取時包括該段的 USE 與 GO。
--- A 段開始：兩筆假資料只新增一次；已新增就跳過 A 段。
+-- 課後複習／選用；有時間才教。只查既有資料，不新增假資料。
+-- 整份可重跑，三個 SELECT 會各顯示一個結果表。
 USE CampusActivityLab08;
 GO
-INSERT INTO dbo.Registrations (DisplayName, Session)
-VALUES (N'小晴', N'下午場');
-INSERT INTO dbo.Registrations (DisplayName, Session)
-VALUES (N'小宇', N'上午場');
--- A 段結束
+SELECT Id, DisplayName, Session
+FROM dbo.Registrations;
 
--- B 段開始：之後只選取本段執行，可重跑；不會新增資料。
-USE CampusActivityLab08;
-GO
+SELECT Id, DisplayName, Session
+FROM dbo.Registrations
+WHERE Session = N'上午場';
+
 SELECT Id, DisplayName, Session
 FROM dbo.Registrations
 WHERE Session = N'上午場'
 ORDER BY Id DESC;
--- B 段結束
